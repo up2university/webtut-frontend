@@ -1,0 +1,156 @@
+{% import "widgets.html.twig" as widget %}
+{% extends "base.html.twig" %}
+{% block title %}{{ session.title }}{% endblock %}
+{% block container %}    
+    <form class="form-horizontal" method="post" action="{{ config.base_path}}/tut/edit/{{ session.token }}/embbed">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{% trans "Participants view" %}</h2>
+        <h3>{{ session.title }}</h3>        
+      </div>    
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="cssurl">{% trans "CSS URL" %}</label>  
+      <div class="col-md-4">
+        <input id="cssurl" name="cssurl" type="text" placeholder="{% trans "CSS URL" %}" class="form-control input-md" required="" value="{{ session.cssurl }}" size=60>
+        <span class="help-block">{% trans "Custom Style Sheet URL:" %} <a href="{{ config.default_css_url }}" target="_new">{% trans "Example" %}</a></span>  
+      </div>
+    </div>
+
+    <!-- Select input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="sessionLayout">{% trans "Session layout" %}</label>  
+      <div class="col-md-8">
+        <select class="form-control input-md" id="sessionLayout_id" name="sessionLayout_id">
+          {% for sessionLayout in session.sessionPossibleLayouts %}
+          <option value="{{ sessionLayout.id }}" {{ (session.sessionLayout_id == sessionLayout.id?"selected":"") }}>{{ sessionLayout.name | translate }}</option>
+          {% endfor %}
+        </select>
+        <span class="help-block">{% trans "Layout to be used on the embed interface." %}</span>  
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <label class="col-md-12">{% trans "Geometry" %}</label>  
+      </div>
+    
+      <div class="row" style="margin-bottom: 20px;">      
+      <!-- Text input-->
+        <div class="col-md-6">
+            <input type="hidden" id="frameWidth" name="frameWidth" value="{{ session.frameWidth }}">          
+            <div class="row">            
+              <div class="col-md-6" id="frameWidthLabel">{% trans "Width" %} {{ session.frameWidth }}</div>
+              <div class="col-md-6 align-right"><input type="checkbox" id="frameAutoWidth"> {% trans "Width 100%" %}</div>
+            </div>
+            <div id="inputBarWidth"></div>
+        </div>
+        <div class="col-md-6">
+            <input type="hidden" id="frameHeight" name="frameHeight" value="{{ session.frameHeight }}">          
+            <div id="frameHeightLabel">{% trans "Height" %} {{ session.frameHeight }}</div>
+            <div id="inputBarHeight"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">      
+      <div class="col-md-12" align="center">
+        <div id="webtut-frame" style="background: rgb(120,120,120); padding: 10px; margin: 0px; margin-bottom: 20px; border-radius: 10px;">
+          <div id="webtut-window" style="background: rgb(150,150,150); text-align: center; style={{ session.frameWidth }}px">
+          {{ embbedHtml.script|raw }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">      
+      <div class="col-md-12">
+        <div>{% trans "Code to link on your webpage" %}</div>
+        <div><pre>{{ embbedHtml.html }}</pre></div>
+        <div>{% trans "Code to embbed on your webpage as script" %}</div>
+        <div><pre>{{ embbedHtml.script }}</pre></div>
+        <div>{% trans "Code to embbed on your webpage as an iFrame" %}</div>
+        <div><pre>&lt;iframe id='webtut_{{ session.token }}' src='{{ config.full_url }}/embbed/{{ session.token }}/client' width="{% if session.frameWidth == 0 %}100%{% else %}{{ session.frameWidth }}{% endif %}" height="{{ session.frameHeight }}" scrolling="no" frameBorder="0"&gt;&lt;iframe&gt;</pre></div>
+      </div>     
+    </div>
+    <div class="row">      
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <button id="save" name="save" class="btn btn-primary col-md-12">{% trans "Save" %}</button>  
+      </div>
+      <div class="col-md-4">        
+        <a target="_blank" class="btn btn-default col-md-12" href="{{ config.base_path }}/embbed/{{ session.token }}/test">{% trans "Test" %}</a>
+      </div>   
+    </div>      
+    </form>
+    <a href="{{ config.base_path }}/tut/dashboard/{{ session.token }}">{% trans "Return to dashboard" %}</a>
+    
+{% endblock %}
+
+{% block scripts %}
+<script src='{{config.base_path }}/js/lib/prelude-browser-0.6.0.min.js' type='text/javascript'></script>
+<script src='{{config.base_path }}/js/jquery-value-bar.js'></script>
+<script>
+
+$(function() {
+
+
+  $('#cssurl').change(function(){
+  });
+
+  $('#sessionLayout_id').change(function(){
+  });
+
+  $('#frameAutoWidth').click(function() {
+    if ($(this).is(':checked')) {
+      $("#frameWidth").val(0);
+      $("#webtut-frame").width("auto");
+      $("#webtut_{{ session.token }}").width("100%");
+    };
+  });
+  
+  $('#inputBarWidth').valueBar({    
+    value : {{ session.frameWidth / 10 }},
+    max : 100,
+    onchange: function(value) {    
+        $("#frameAutoWidth").prop('checked', false);    
+        $("#frameWidthLabel").html("{% trans "Width" %} " + value * 10);
+        $("#frameWidth").val(value * 10);
+        $("#webtut-frame").width(value * 10);
+        $("#webtut_{{ session.token }}").width(value * 10);
+      }      
+  }),
+  
+  $('#inputBarHeight').valueBar({
+    value : {{ session.frameHeight / 10 }},
+    max : 100,
+    onchange: function(value) {
+        $("#frameHeightLabel").html("{% trans "Height" %} " + value * 10);
+        $("#frameHeight").val(value * 10);
+        $("#webtut-frame").height(value * 10);
+        $("#webtut_{{ session.token }}").height(value * 10);
+      }      
+  })
+})
+
+$( document ).ready(function() {
+
+  value = {{ session.frameHeight }};
+  $("#webtut-frame").height(value);
+  $("#webtut_{{ session.token }}").height(value);  
+  
+  value = {{ session.frameWidth }};
+  
+  if (value == 0) {
+    $("#frameAutoWidth").prop('checked', true);
+  } else {
+    $("#frameAutoWidth").prop('checked', false);
+    $("#webtut-frame").width(value);
+    $("#webtut_{{ session.token }}").width(value);
+  }
+  
+});
+    
+</script>
+{% endblock %}

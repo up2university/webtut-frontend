@@ -1,0 +1,22 @@
+Caro {session_host_name},
+</p>
+<p>
+Tem neste momento um aluno a aguardar na sessão: <a href="{session_url_dashboard}">{session_name}</a>.
+</p>
+<p>
+{participantsTable}
+</p>
+&nbsp;
+<p>
+
+    <table width="100%" margin="0" cellpadding="0" cellspacing="0" border="0">
+     <tr>
+      <td bgcolor="#428BCC"><img src="cid:spacer" width=10 height=40></td>
+      <td width="100%"align="center" bgcolor="#428BCA">
+       <font size="3" face="Arial"><strong><a style="text-decoration: none; color: white;" href="{session_url_enter}">Atender Já!</a></strong></font>
+      </td>
+      <td bgcolor="#428BC0"><img src="cid:spacer" width=10 height=40></td>
+     </tr>
+    </table>       
+
+</p>

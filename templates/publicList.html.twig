@@ -1,0 +1,17 @@
+{% import "widgets.html.twig" as widget %}
+{% extends "base.html.twig" %}
+{% block title %}{{ title}}{% endblock %}
+{% block container %}
+    <div class="row">
+      <h1>{{ title }}</h1>
+      <p>{{ text|raw }}</p>
+    </div>
+    <div class="row">
+      {{ widget.publicSessiontable(config, sessions, ss) }}      
+    </div>
+    
+    <div class="row">    
+      <a href="{{ config.base_path }}/">{% trans "Return to Home Page" %}</a>
+    </div>  
+
+{% endblock %}

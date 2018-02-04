@@ -1,0 +1,11 @@
+app/config.php
+httpd/webtut.conf
+vendor/
+node_modules/
+logs/*
+*.lock
+cache/
+*~
+composer.phar
+messages.mo
+html/.htaccess

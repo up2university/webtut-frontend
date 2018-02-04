@@ -1,0 +1,356 @@
+{% extends "base.html.twig" %}
+{% block title %}{% if (mode == "edit") %}{% trans "Edit TUT" %}{% else %}{% trans "New TUT" %}{% endif %}{% endblock %}
+{% block container %}
+<h1>{% if (mode == "edit") %}{% trans "Edit TUT" %}{% else %}{% trans "New TUT" %}{% endif %}</h1>
+<form class="form-horizontal" method="post" action="{{ config.base_path}}/tut/edit/{{ tut.token }}/details">
+<fieldset>
+
+<ul class="nav nav-tabs" id="formTabs" data-tabs="tabs" role="tablist">
+  <li class="active" role="presentation"><a id="form_main_tab" data-toggle="tab" role="tab" href="#form_main" aria-controls="form_main" aria-expanded="true">{% trans "Main" %}</a></li>
+  <li role="presentation"><a id="form_dates_tab" data-toggle="tab" role="tab" href="#form_dates" aria-controls="form_dates">{% trans "Dates" %}</a></li>
+  <li role="presentation"><a id="form_configuration_tab" data-toggle="tab" role="tab" href="#form_configuration" aria-controls="form_coniguration">{% trans "Configuration" %}</a></li>
+  <li role="presentation"><a id="form_security_tab" data-toggle="tab" role="tab" href="#form_security"  aria-controls="form_security">{% trans "Security" %}</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="form_main" role="tabpanel" class="tab-pane active fade in">
+  
+    <!-- Form Name -->
+    <legend>{% trans "Main" %}</legend>
+    <input name="id" type="hidden" value="{{ tut.id }}">
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="title">{% trans "Title" %}</label>  
+      <div class="col-md-4">
+        <input id="title" name="title" type="text" placeholder="{% trans "WebTUT name" %}" class="form-control input-md" required="" value="{{ tut.title }}">
+        <span class="help-block">{% trans "WebTUT public name" %}</span>  
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="description">{% trans "Description" %}</label>
+      <div class="col-md-4">                     
+        <textarea class="form-control" id="description" name="description">{{ tut.description }}</textarea>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+      </div>
+      <div class="col-md-10">
+      </div>      
+      <div class="col-md-2">
+        <a class="btn btn-default updateTab col-md-12" data-tab="#form_dates_tab" href="#">{% trans "Set Dates" %} <span class="glyphicon glyphicon-triangle-right"></span></a>
+      </div>
+    </div>
+
+  </div>
+
+  
+  <div id="form_dates" role="tabpanel" class="tab-pane fade in">
+
+    <!-- Form Name -->
+    <legend>{% trans "Dates" %}</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="dateStart">{% trans "Start Date" %}</label>  
+      <div class="col-md-4">
+      <input id="dateStart" name="dateStart" type="text" placeholder="YYYY/MM/DD" class="form-control input-md" required="" value="{{ tut.dateStart|date("Y/m/d") }}">
+      <span class="help-block">{% trans "Start date" %}</span>  
+      </div>
+    </div>
+
+    <!-- Search input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="dateEnd">{% trans "End date" %}</label>
+      <div class="col-md-4">
+        <input id="dateEnd" name="dateEnd" type="search" placeholder="YYYY/MM/DD" class="form-control input-md" required="" value="{{ tut.dateEnd|date("Y/m/d") }}">
+        <p class="help-block">{% trans "End date" %}</p>
+      </div>
+    </div>
+
+    <!-- Duration -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="duration">{% trans "Duration" %}</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input id="duration" name="duration" type="search" placeholder="HH:MM" class="form-control input-md" required="" value="{{ tut.duration|date('H:i') }}">
+          <p class="help-block">{% trans "WebTUT duration" %}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weekdays -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="repeatMonday">{% trans "Monday" %}</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">     
+            <input type="checkbox" id="activeMonday" data-text="repeatMonday" name="activeMonday" {{ tut.activeMonday ? "checked" }}>     
+          </span>
+          <input id="repeatMonday" name="repeatMonday" type="search" placeholder="HH:MM" class="form-control input-md" required="" value="{{ tut.repeatMonday|date('H:i') }}">
+        </div>
+        <p class="help-block">{% trans "Repeat Monday at" %}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="repeatTuesday">{% trans "Tuesday" %}</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">     
+            <input type="checkbox" id="activeTuesday" data-text="repeatTuesday" name="activeTuesday" {{ tut.activeTuesday ? "checked" }}>
+          </span>  
+        <input id="repeatTuesday" name="repeatTuesday" type="search" placeholder="HH:MM" class="form-control input-md" required="" value="{{ tut.repeatTuesday|date('H:i') }}">
+        </div>
+        <p class="help-block">{% trans "Repeat Tuesday at" %}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="repeatWednesday">{% trans "Wednesday" %}</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">     
+            <input type="checkbox" id="activeWednesday" data-text="repeatWednesday" name="activeWednesday" {{ tut.activeWednesday ? "checked" }}>
+          </span>  
+        <input id="repeatWednesday" name="repeatWednesday" type="search" placeholder="HH:MM" class="form-control input-md" required="" value="{{ tut.repeatWednesday|date('H:i') }}">
+        </div>
+        <p class="help-block">{% trans "Repeat Wednesday at" %}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="repeatThursday">{% trans "Thursday" %}</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">     
+            <input type="checkbox" id="activeThursday" data-text="repeatThursday" name="activeThursday" {{ tut.activeThursday ? "checked" }}>
+          </span>  
+        <input id="repeatThursday" name="repeatThursday" type="search" placeholder="HH:MM" class="form-control input-md" required="" value="{{ tut.repeatThursday|date('H:i') }}">
+        </div>
+        <p class="help-block">{% trans "Repeat Thursday at" %}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="repeatFriday">{% trans "Friday" %}</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">     
+            <input type="checkbox" id="activeFriday" data-text="repeatFriday" name="activeFriday" {{ tut.activeFriday ? "checked" }}>
+          </span>  
+        <input id="repeatFriday" name="repeatFriday" type="search" placeholder="HH:MM" class="form-control input-md" required="" value="{{ tut.repeatFriday|date('H:i') }}">
+        </div>
+        <p class="help-block">{% trans "Repeat Friday at" %}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="repeatSaturday">{% trans "Saturday" %}</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">     
+            <input type="checkbox" id="activeSaturday" data-text="repeatSaturday" name="activeSaturday" {{ tut.activeSaturday ? "checked" }}>
+          </span>  
+        <input id="repeatSaturday" name="repeatSaturday" type="search" placeholder="HH:MM" class="form-control input-md" required="" value="{{ tut.repeatSaturday|date('H:i') }}">
+        </div>
+        <p class="help-block">{% trans "Repeat Saturday at" %}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="repeatSunday">{% trans "Sunday" %}</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">     
+            <input type="checkbox" id="activeSunday" data-text="repeatSunday" name="activeSunday" {{ tut.activeSunday ? "checked" }}>
+          </span>  
+        <input id="repeatSunday" name="repeatSunday" type="search" placeholder="HH:MM" class="form-control input-md" required="" value="{{ tut.repeatSunday|date('H:i') }}">
+        </div>
+        <p class="help-block">{% trans "Repeat Sunday at" %}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+      </div>      
+      <div class="col-md-2">
+        <a class="btn btn-default updateTab col-md-12" data-tab="#form_main_tab" href="#"><span class="glyphicon glyphicon-triangle-left"></span> {% trans "Back" %}</a>
+      </div>      
+      <div class="col-md-8">
+      </div>      
+      <div class="col-md-2">
+        <a class="btn btn-default updateTab col-md-12" data-tab="#form_configuration_tab" href="#">{% trans "Set configuration" %} <span class="glyphicon glyphicon-triangle-right"></span></a>
+      </div>
+    </div>
+    
+  </div>
+
+  <div id="form_configuration" role="tabpanel" class="tab-pane fade in">
+
+    <!-- Form Name -->
+    <legend>{% trans "Configuration" %}</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="maxQueue">{% trans "Max number of students waiting" %}</label>  
+      <div class="col-md-2">
+        <input id="maxQueue" name="maxQueue" type="text" placeholder="{% trans "participants" %}" class="form-control input-md" required="" value="{{ tut.maxQueue }}">
+        <span class="help-block">{% trans "Number of participants" %}</span>  
+      </div>
+    </div>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="notifyHost">{% trans "Notify Host" %}</label>
+      <div class="col-md-4">
+        <div class="checkbox">
+          <label for="notifyHost">
+            <input type="checkbox" name="notifyHost" id="notifyHost" {{ tut.notifyHost ? "checked" }}>
+            {% trans "Notify host by e-mail, upon student request to meet." %}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Select input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="sessionQueueStrategy">{% trans "Queue strategy" %}</label>  
+      <div class="col-md-8">
+        <select class="form-control input-md" id="sessionQueueStrategy_id" name="sessionQueueStrategy_id">
+          {% for sessionQueueStrategy in tut.sessionPossibleQueueStrategies %}
+          <option value="{{ sessionQueueStrategy.id }}" {{ (tut.sessionQueueStrategy_id == sessionQueueStrategy.id?"selected":"") }}>{{ sessionQueueStrategy.name | translate }}</option>
+          {% endfor %}
+        </select>
+        <span class="help-block">{% trans "Session queue strategy to deliver participants to experts." %}</span>  
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-default updateTab col-md-12" data-tab="#form_dates_tab" href="#"><span class="glyphicon glyphicon-triangle-left"></span> {% trans "Back" %}</a>
+      </div>
+      <div class="col-md-8"></div>
+      <div class="col-md-2">
+        <a class="btn btn-default updateTab col-md-12" data-tab="#form_security_tab" href="#">{% trans "Set security" %} <span class="glyphicon glyphicon-triangle-right"></span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="form_security" role="tabpanel" class="tab-pane fade in">
+
+    <!-- Form Name -->
+    <legend>{% trans "Security" %}</legend>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="active">{% trans "Active" %}</label>
+      <div class="col-md-4">
+        <div class="checkbox">
+          <label for="active">
+            <input type="checkbox" name="active" id="active" {{ tut.active ? "checked" }}>
+            {% trans "WebTUT is enabled" %}
+          </label>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="mustAuthenticate">{% trans "Authentication" %}</label>
+      <div class="col-md-4">
+        <div class="checkbox">
+          <label for="mustAuthenticate">
+            <input type="checkbox" name="mustAuthenticate" id="mustAuthenticate" {{ tut.mustAuthenticate ? "checked" }}>
+            {% trans "User must authenticate" %}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="visibleToAll">{% trans "Visibility" %}</label>
+      <div class="col-md-4">
+        <div class="checkbox">
+          <label for="visibleToAll">
+            <input type="checkbox" name="visibleToAll" id="visibleToAll" {{ tut.visibleToAll ? "checked" }}>
+            {% trans "Webtut visible on public list." %}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-default updateTab col-md-12" data-tab="#form_configuration_tab" href="#"><span class="glyphicon glyphicon-triangle-left"></span> {% trans "Back" %}</a> 
+      </div>
+    </div>
+    
+  </div>
+  
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-10"></div>
+  <div class="col-md-2">
+    <!-- Button -->
+    <div class="form-group">
+      <div class="col-md-10"></div>
+      <button id="save" name="save" class="btn btn-primary col-md-12">{% trans "Save" %}</button>  
+    </div>
+  </div>
+</div>  
+
+</fieldset>
+</form>
+
+{% if (mode == "edit") %}
+  <a href="{{ config.base_path }}/tut/dashboard/{{ tut.token }}">{% trans "Return to dashboard" %}</a>
+{% else %}
+  {% if (ss.authenticated) %}
+    <a href="{{ config.base_path }}/tut/my">{% trans "Return to my WebTUTs" %}</a>
+  {% else %}
+    <a href="{{ config.base_path }}/">{% trans "Return to Home Page" %}</a>
+  {% endif %}
+{% endif %}
+    
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+$(".updateTab").click(function(event){    
+    event.preventDefault();
+    $($(this).data('tab')).click();
+})
+
+$("input[id^='active']").each(function(event) {
+  $("#" + $(this).data("text")).disabled = !$(this).is(':checked');  
+});
+
+$("input[id^='active']").click(function(event) {
+  if ($(this).is(':checked')) {
+    $("." + $(this).data("text")).disable = true;    
+  } else {
+    $("." + $(this).data("text")).disable = false;    
+  }
+});
+    
+</script> 
+{% endblock %}

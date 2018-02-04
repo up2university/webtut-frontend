@@ -1,0 +1,207 @@
+{% macro cell(value) %}
+
+  {% set t = value|type %}
+  
+  {% if t == "object" %}
+    {{ _self.table(value) }}
+  {% endif %}
+  {% if t == "array" %}
+    {{ _self.table(value) }}
+  {% endif %}
+  {% if t == "integer" %}
+    {{ value }}
+  {% endif %}
+  {% if t == "string" %}
+    {{ value }}
+  {% endif %}
+  {% if t == "boolean" %}
+    {% if value %}
+      {% trans "True" %}
+    {% else %}
+      {% trans "False" %}
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{% macro tableArray(entities) %}  
+  <table class="table table-striped">
+    {% for key, value in entities %}
+    <tr>
+      <th nowrap>{{ key }}</th>
+      <td width="100%">{{ _self.cell(value) }}</td>
+    </tr>
+    {% endfor %}   
+  </table>
+{% endmacro %}
+
+{% macro tableObject(entities) %}  
+  <table class="table table-striped">
+    {% for key, value in entities | cast_to_array %}
+    <tr>      
+      <th>{{ _self.cell(key) }}</th>
+      <td width="100%">{{ _self.cell(value) }}</td>
+    </tr>
+    {% endfor %}   
+  </table>
+{% endmacro %}
+
+{% macro table(entities) %}
+
+  {% if entities | type == "array" %}
+    {{ _self.tableArray(entities) }}
+  {% endif %}
+
+  {% if entities | type == "object" %}
+    {{ _self.tableObject(entities) }}
+  {% endif %}
+  
+{% endmacro %}
+
+{% macro sessiontable(config, sessions, ss) %}  
+  <table class="table table-striped">
+    <tr>
+      <th nowrap>{% trans "State" %}</th>
+      <th width="100%">{% trans "Title" %}</th>
+      <th nowrap>{% trans "Must Authenticate" %}</th>
+      <th nowrap>{% trans "Visible to All" %}</th>
+      <th nowrap>{% trans "Action" %}</th>
+    </tr>
+    {% for session in sessions %}    
+    <tr>
+      <th>{{ session.getCurrentState | translate }}</th>
+      <th><a href="{{ config.base_path }}/tut/dashboard/{{ session.token }}">{{ session.title }}</a></th>
+      <td align="center">{% if (session.mustAuthenticate) %}<span class="glyphicon glyphicon-lock">{% else %}<span class="glyphicon glyphicon-globe">{% endif %}</td>
+      <td align="center">{% if (session.visibleToAll) %}<span class="glyphicon glyphicon-ok">{% else %}<span class="glyphicon glyphicon-minus">{% endif %}</td>      
+      <td align="center">
+        <a href="{{ config.base_path }}/tut/dashboard/{{ session.token }}"><span class="glyphicon glyphicon-cog"></span></a>
+        <a href="{{ config.base_path }}/tut/enter/{{ session.token }}"><span class="glyphicon glyphicon-user"></span></a>        
+      </td>
+    </tr>
+    {% endfor %}   
+  </table>
+{% endmacro %}
+
+{% macro publicSessionTable(config, sessions, ss) %}  
+  <table class="table table-striped">
+    <tr>
+      <th nowrap>{% trans "State" %}</th>
+      <th width="100%">{% trans "Title" %}</th>       
+      <th nowrap>{% trans "Features" %}</th>      
+      <th nowrap>{% trans "Action" %}</th>
+    </tr>
+    {% for session in sessions %}
+      {% if ((session.mustAuthenticate) and (ss.authenticated)) or (not session.mustAuthenticate) %}
+      <tr>
+        <td>{{ session.getCurrentState | translate }}</td>
+        <td>{{ session.title }}</td>
+        <td align="center">{% if (session.mustAuthenticate) %}<span class="glyphicon glyphicon-lock">{% else %}<span class="glyphicon glyphicon-globe">{% endif %}</td>       
+        <td align="center">
+          {% if session.getCurrentState != 'closed' %}
+            <a href="{{ config.base_path }}/embbed/{{ session.token }}/client"><span class="glyphicon glyphicon-log-in"></span></a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endif %}
+    {% endfor %}   
+  </table>
+{% endmacro %}
+
+{% macro cookieHeaderHTML(config) %}
+
+<section id="cookies" style="display: none;">
+  <div class="container">
+    <div id="cookies_on" class="cookie_frame">            
+      <div class="buttons">
+        <a class="btn btn-default more" title="{% trans "More about..." %}" href="{{ config.base_path }}/doc/cookies-terms-of-usage">{% trans "More about..." %}</a>
+        <a id="removecookie" class="btn btn-primary" href="#" title="{% trans "OK, I ACCEPT" %}">{% trans "Ok, I accept" %}</a>
+      </div>
+      <div class="text">{% trans "The cookies help us to offer this service. By using this service, you accept the usage of cookies." %}</div>      
+    </div>
+  </div>
+</section>
+
+{% endmacro %}
+
+
+{% macro cookieHeaderJS() %}
+
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+
+  function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    
+    for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+    } 
+
+    function createCookie(name, value, days) {
+      var expires;
+
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+      } else {
+        expires = "";
+      }
+      
+      document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
+    }
+
+    if (readCookie('cookieeumo') != 1) {
+      $("#cookies").show();
+    }
+    
+    $("#removecookie").click(function () {
+      createCookie('cookieeumo', 1, 30);
+      $("#cookies").remove();
+    });
+
+  });
+</script>
+
+{% endmacro %}
+
+{% macro modalHTML(mode) %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        {% if mode.cancel %}
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% endif %}
+        <h4 class="modal-title"><div id="modal-dialog-title"></div></h4>
+      </div>
+      <div class="modal-body" id="modal-dialog-body">        
+      </div>
+      <div class="modal-footer" id="modal-dialog-footer">               
+        {% if mode.ok %}
+        <button type="button" class="btn btn-primary">{% trans "Ok" %}</button>
+        {% endif %}
+        {% if mode.cancel %}
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        {% endif %}
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endmacro %}
+
+{% macro modalJS() %}
+<script type="text/javascript">
+  function modal_alert_block(title, body) {
+    $("#modal-dialog-title").html(title);
+    $("#modal-dialog-body").html(body);
+    $("#modal-dialog").modal({
+      show: true,
+      backdrop: 'static',
+      keyboard: false});
+  }
+</script>
+{% endmacro %}

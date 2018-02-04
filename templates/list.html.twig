@@ -1,0 +1,24 @@
+{% import "widgets.html.twig" as widget %}
+{% extends "base.html.twig" %}
+{% block title %}{{ title}}{% endblock %}
+{% block container %}
+    <div class="row">
+      <h1>{{ title }}</h1>
+      <p>{{ text|raw }}</p>
+    </div>
+    <div class="row">
+      {{ widget.sessiontable(config, sessions, ss) }}
+      <hr>      
+    </div>
+    
+    <div class="row">    
+      <a class="btn btn-primary col-xs-3" href="{{ config.base_path }}/tut/new">{% trans "New" %}</a>
+    </div>
+    
+    <div class="row">
+    <hr>
+    <a href="{{ config.base_path }}/">{% trans "Return to Home Page" %}</a>
+
+    </div>  
+
+{% endblock %}

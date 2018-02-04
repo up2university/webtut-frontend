@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block container %}
+
+<div class="row">
+ <div class="col-sm-12">
+   <H1>{{ config.app_name }}</H1>
+   <p>{{ description|raw }}</p>
+ </div> 
+</div>
+<div class="row">
+  <div class="col-sm-4 col-md-4 homepage_select_column">
+    <a href="{{ config.base_path }}/tut/new">
+      <div class="homepage_select">
+        <img src="{{ config.base_path }}/assets/imgs/schedule_photo.jpg">
+        <div>{% trans "I want to set a session" %}</div>
+      </div>
+    </a>
+  </div>
+  <div class="col-sm-4 col-md-4 homepage_select_column">  
+    <a href="{{ config.base_path }}/tut/my">
+     <div class="homepage_select">
+      <img src="{{ config.base_path }}/assets/imgs/tutor_photo.jpg">
+      <div>{% trans "I want to enter in session" %}</div>
+     </div>
+    </a>
+  </div>
+  <div class="col-sm-4 col-md-4 homepage_select_column">
+    <a href="{{ config.base_path }}/tut/all">
+      <div class="homepage_select">
+        <img src="{{ config.base_path }}/assets/imgs/enter_photo.jpg">
+        <div>{% trans "The teacher is waiting for me" %}</div>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="row">
+ <div class="col-sm-8">   
+   {{ lang.obj.getHtmlContent("html-teacher-homepage") | raw }}
+ </div> 
+ <div class="col-sm-4">
+   {{ lang.obj.getHtmlContent("html-student-homepage") | raw }}
+ </div> 
+</div>
+
+{% endblock %}

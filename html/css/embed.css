@@ -1,0 +1,33 @@
+/* Full Embed */
+
+body { 
+  padding: 0px;
+  margin: 0px;
+  background-color: white;
+}
+
+/* Clien Application */
+.client-app {
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+}
+
+
+.client-title {
+  margin: 0px;
+  padding: 0px;
+  color: black;
+}
+
+.client-footer {
+  margin: 0px;
+  padding: 10px;
+  background-color: white;
+}
+
+#widget-lurking {
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+}

@@ -1,0 +1,32 @@
+{% import "widgets.html.twig" as widget %}
+{% extends "base.html.twig" %}
+{% block title %}{{ session.title }}{% endblock %}
+{% block container %}
+
+    <h1>{% trans "Messages for session: " %}{{ session.title }}</h1>
+    <form class="form-horizontal" method="post" action="{{ config.base_path}}/tut/messages/{{ session.token }}">
+    <div class="row">
+    
+      {% for message in messages %}
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="msg-{{ message.label }}">{{ message.name }}</label>  
+        <div class="col-md-4">
+          <textarea name="msg-{{ message.label }}" id="msg-{{ message.label }}" cols="80" rows="6">{{ message.message ? message.message : message.default }}</textarea>
+        </div>
+      </div>
+      {% endfor %}   
+    
+    </div>
+    <div class="row">              
+      <div class="col-md-4"></div>
+      <div class="col-md-8">
+        <button id="save" name="save" class="btn btn-primary col-md-4">{% trans "Save" %}</button>  
+      </div>      
+    </div>
+    </form>
+    <a href="{{ config.base_path }}/tut/dashboard/{{ session.token }}">{% trans "Return to dashboard" %}</a>
+    
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

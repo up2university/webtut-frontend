@@ -1,0 +1,210 @@
+{% import "socialMedia.html.twig" as socialMedia %}
+{% import "widgets.html.twig" as widget %}
+<!DOCTYPE html>
+<html lang="{{ lang.locale }}" ng-app="WebTutApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block description %}{{ config.app_description }}{% endblock %}">
+    <meta name="author" content="{{ config.app_author }}">
+    {% block meta %}{% endblock %}
+    
+    {{ socialMedia.facebook_head(config) }}
+    {{ socialMedia.twitter_head(config) }}
+    
+    <link rel="shortcut icon" href="{{ config.base_path }}/assets/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ config.base_path }}/assets/ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ config.base_path }}/assets/ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ config.base_path }}/assets/ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ config.base_path }}/assets/ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ config.base_path }}/assets/ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ config.base_path }}/assets/ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ config.base_path }}/assets/ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ config.base_path }}/assets/ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ config.base_path }}/assets/ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ config.base_path }}/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ config.base_path }}/assets/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ config.base_path }}/assets/ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ config.base_path }}/assets/ico/favicon-16x16.png">
+    <link rel="manifest" href="{{ config.base_path }}/assets/ico/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ config.base_path }}/assets/ico/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>{% block title %}{{ config.app_title }}{% endblock %}</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ config.base_path }}/css/vendor/app.css">
+    <link rel="stylesheet" href="{{ config.base_path }}/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    {% block styles %}{% endblock %}
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->    
+    
+</head>
+
+{% block body %}
+<body class="{{ getPageClasses() }}">
+{% block cookies %}
+{{ widget.cookieHeaderHTML(config) }}
+{% endblock %}
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-static-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <a class="navbar-brand" href="{{ config.base_path }}/">{{ config.app_name }}</a>  
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="{{ getActiveClass('') }} navbar-left"><a href="{{ config.base_path }}/">{% trans "Home" %}</a></li>
+        <li class="dropdown {{ getActiveClass('/tut') }} navbar-left">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "WebTUT" %}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li class="{{ getActiveClass('/tut/new') }}"><a href="{{ config.base_path }}/tut/new/">{% trans "New WebTut" %}</a></li>  
+            <li role="separator" class="divider"></li>           
+            <li class="{{ getActiveClass('/tut/my') }}"><a href="{{ config.base_path }}/tut/my/">{% trans "My Tut's" %}</a></li>
+            <li class="{{ getActiveClass('/tut/all') }}"><a href="{{ config.base_path }}/tut/all">{% trans "All Tut's" %}</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+        <li class="dropdown {{ getActiveClass('/help') }} navbar-right">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Language" %}<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownLanguageMenu">
+            {% for locale in config.locales %}
+            <li class="{{ lang.label == locale.label ? 'active' }}" role="presentation" id="menuLang_{{ locale.locale }}">
+              <a role="menuitem" href='{{ config.base_path }}/utils/setlang/{{ locale.label }}'>
+              <img alt='{{ locale.flag_alt | translate }}' src='{{ config.base_path }}/assets/imgs/flags/gif/{{ locale.label | lower }}.gif'/> {{ locale.language }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        
+        {% if ss.authenticated %}              
+        <li class="dropdown {{ getActiveClass('/profile') }} navbar-right">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ ss.friendlyName }}<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownLanguageMenu">
+            <li role="presentation" id="userProfile" class="{{ getActiveClass('/profile/me') }}">
+              <a role="menuitem" href='{{ config.base_path }}/profile/me'>{% trans "Profile" %}</a>
+            </li>
+            <li role="presentation" id="userTuts" class="{{ getActiveClass('/tut/my') }}">
+              <a role="menuitem" href='{{ config.base_path }}/tut/my'>{% trans "My Tut's" %}</a>
+            </li>
+            {% if ss.admin %}
+            <li role="separator" class="divider"></li>
+            <li role="presentation" id="admin" class="{{ getActiveClass('/admin') }}">
+              <a role="menuitem" href='{{ config.base_path }}/admin'>{% trans "Administrator" %}</a>
+            </li>
+            {% endif %}
+            <li role="separator" class="divider"></li>
+            <li role="presentation" id="logout">
+              <a role="menuitem" href='{{ config.base_path }}/utils/logout'>{% trans "Logout" %}</a>
+            </li>
+          </ul>
+        </li>
+          {% if ss.admin %}
+            <li class="navbar-right">
+              <a href="#" id="backendServerStatus"></a>            
+            </li>
+          {% endif %}
+        {% else %}
+        <li class="{{ getActiveClass('/utils/login') }} navbar-right"><a href="{{ config.base_path }}/utils/login">{% trans "Login" %}</a></li>
+        {% endif %}                          
+      </ul>            
+    </div><!--/.nav-collapse -->  
+  </div>
+</nav>
+
+<!-- Begin page content -->
+{% block content %}
+<div class="container">
+  {% block container %}
+  <div class="page-header">
+    <h1>{{ config.app_name }}</h1>
+  </div>
+  {% endblock %}
+</div>
+{% endblock %}
+
+  <div class="space50">
+    <div id="footer">
+      <div class="container">
+        <p class="row">
+          <p class="col-xs-6">
+            FCT|FCCN 2016
+          </p>
+          <p class="col-xs-6 align-right">
+            <a href="{{ config.base_path }}/doc/help">{% trans "Help" %}</a> | 
+            <a href="{{ config.base_path }}/doc/credits">{% trans "Credits" %}</a>
+          </p>            
+        </p>
+      </div>        
+      <div class="container">
+        <p class="row">
+          <p class="col-md-12">
+            <div class="geant">
+              <img src="{{ config.base_path }}/assets/imgs/eu-flag.jpg">
+              <p>This work is part of a project that has received funding from the European Union’s Horizon 2020 research and innovation programme under Grant Agreement No. 731122 (GN4-2).</p>
+            </div>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="{{ config.base_path }}/js/socket.io.js"></script>
+<script src="{{ config.base_path }}/js/peer.js"></script>
+<script src="{{ config.base_path }}/js/jquery.dataTables.min.js"></script>
+<!-- Check for jQuery and Bootstrap, load them locally if they don't exist -->
+<script>if(!window.jQuery){document.write('<script src="{{ config.base_path }}/js/jquery-1.11.3.min.js"><\/script>')};</script>
+<script>if(typeof $.fn.emulateTransitionEnd != 'function'){document.write('<script src="{{ config.base_path }}/js/bootstrap.min.js"><\/script>')};</script>
+<script src="{{ config.base_path }}/js/app.js"></script>
+{{ widget.cookieHeaderJS }}
+{% block scripts %}{% endblock %}
+{% if config.google_analytics is defined %}
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', '{{ config.google_analytics }}', 'auto');
+ga('send', 'pageview');
+</script>
+{% endif %}
+{% block admin_scripts %}
+{% if ss.admin %}
+<script>
+
+jQuery( document ).ready(function( $ ) {
+   
+  $("#backendServerStatus").autoRefreshData("https://{{ config.backend_host }}:{{ config.backend_port }}/getVersion", 30000, function(data) {
+    console.log(data);
+    if (data.error == 1) {
+      $("#backendServerStatus").html("<span class='glyphicon glyphicon-remove-sign' style='color: red;'></span>");
+    } else {
+      $("#backendServerStatus").html("<span class='glyphicon glyphicon-ok-sign' style='color: green;'></span>");
+    }
+  });
+  
+});  
+</script>
+{% endif %}
+{% endblock %}
+</html>

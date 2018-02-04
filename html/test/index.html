@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt_PT" ng-app="WebTutApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WebTutoring App using WebRTC">
+    <meta name="author" content="Rui Ribeiro">
+        <link rel="shortcut icon" href="/webtut/assets/ico/favicon.ico">
+
+    <title>Webtutoring App using WebRTC</title>
+
+    <!-- Custom styles for this template -->
+    <link href="/webtut/css/vendor/app.css" rel="stylesheet">
+    <link href="/webtut/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="/webtut/css/app_custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->    
+    <style>
+      iframe {
+        border: none;
+      }
+        html {
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map_canvas {
+            height: 100%;
+        }
+    </style>
+    
+</head>
+
+<body class="webtut home" onload="initialize()">
+
+
+
+    <div id="map_canvas"></div>
+
+
+
+
+<a href="#popupVideo" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Launch video player</a>
+<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
+    <iframe src="https://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless=""></iframe>
+</div>
+
+</body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/webtut/js/socket.io.js"></script>
+<script src="/webtut/js/peer.js"></script>
+<script src="/webtut/js/jquery.dataTables.min.js"></script>
+<!-- Check for jQuery and Bootstrap, load them locally if they don't exist -->
+<script>if(!window.jQuery){document.write('<script src="/webtut/js/jquery-1.11.3.min.js"><\/script>')};</script>
+<script>if(typeof $.fn.emulateTransitionEnd != 'function'){document.write('<script src="/webtut/js/bootstrap.min.js"><\/script>')};</script>
+<script src="/webtut/js/app.js"></script>
+
+    <script>
+        function initialize() {
+            var myLatlng = new google.maps.LatLng( 0,0 );
+            var myOptions = {
+                zoom: 10,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map( document.getElementById( "map_canvas" ), myOptions );
+        }
+    </script>
+    <script src="https://maps.google.com/maps/api/js"></script>
+
+<script type="text/javascript">
+  
+
+// popup examples
+$( document ).on( "pagecreate", function() {
+    // The window width and height are decreased by 30 to take the tolerance of 15 pixels at each side into account
+    function scale( width, height, padding, border ) {
+        var scrWidth = $( window ).width() - 30,
+            scrHeight = $( window ).height() - 30,
+            ifrPadding = 2 * padding,
+            ifrBorder = 2 * border,
+            ifrWidth = width + ifrPadding + ifrBorder,
+            ifrHeight = height + ifrPadding + ifrBorder,
+            h, w;
+        if ( ifrWidth < scrWidth && ifrHeight < scrHeight ) {
+            w = ifrWidth;
+            h = ifrHeight;
+        } else if ( ( ifrWidth / scrWidth ) > ( ifrHeight / scrHeight ) ) {
+            w = scrWidth;
+            h = ( scrWidth / ifrWidth ) * ifrHeight;
+        } else {
+            h = scrHeight;
+            w = ( scrHeight / ifrHeight ) * ifrWidth;
+        }
+        return {
+            'width': w - ( ifrPadding + ifrBorder ),
+            'height': h - ( ifrPadding + ifrBorder )
+        };
+    };
+    $( ".ui-popup iframe" )
+        .attr( "width", 0 )
+        .attr( "height", "auto" );
+    $( "#popupVideo" ).on({
+        popupbeforeposition: function() {
+            // call our custom function scale() to get the width and height
+            var size = scale( 497, 298, 15, 1 ),
+                w = size.width,
+                h = size.height;
+            $( "#popupVideo iframe" )
+                .attr( "width", w )
+                .attr( "height", h );
+        },
+        popupafterclose: function() {
+            $( "#popupVideo iframe" )
+                .attr( "width", 0 )
+                .attr( "height", 0 );
+        }
+    });
+});
+
+  
+  
+</script>
+
+
+</html>

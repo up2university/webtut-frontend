@@ -1,0 +1,30 @@
+{% import "widgets.html.twig" as widget %}
+{% if participant %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-user"></span> {% trans "In Session" %}
+    </div>
+    <div class="panel-body nopadding">
+      <table class="table table-striped col-md-12">
+        <tr>
+          <th>{% trans "Name" %}</th><td>{{ participant.participantName }}</td>
+        </tr>
+        <tr>
+          <th nowrap>{% trans "e-Mail" %}</th><td>{{ participant.participantEmail }}</td>
+        </tr>
+        <!--<tr>
+          <th>IP</th><td class="truncate">{{ participant.participantIP }}</td>
+        </tr>-->
+      </table>
+    </div>
+    <div class="panel-body" style="padding-top: 0px;">
+      <a href="#" id="requestHangup" class="col-md-12 btn btn-primary" data-url="{{ config.base_path }}/api/participant/requestHangup/{{ participant.token }}">{% trans "Hangup" %}</a>
+    </div>
+  </div>
+{% else %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-user"></span> {% trans "Not in Session" %}
+    </div>
+  </div>
+{% endif %}

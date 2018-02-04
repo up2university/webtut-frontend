@@ -1,0 +1,288 @@
+{% extends "clientBase.html.twig" %}
+{% import "callstats_ui.macros.twig" as callstats %}
+{% import "widgets.html.twig" as widget %}
+{% import "webrtc.html.twig" as webrtc %}
+{% import "chat.html.twig" as chat %}
+{% block title %}{{ session.title}}{% endblock %}
+{% block container %}
+    {{ widget.modalHTML() }}
+    <div class="row">
+      <div class="col-md-12">
+        <a style="float: right;" href="#" id="closeClient">{% trans "Close Meeting" %}</a>
+        <h2>{{ session.title }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9 col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">{% trans "Remote Video" %}</div>
+          <div class="panel-body nopadding">
+	          <div class="videoContainer">
+            {{ webrtc.remoteVideo() }}    
+            {{ chat.chatPanel(session) }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-xs-12">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-right">{{ webrtc.testAudioBadge() }}</div>
+                {% trans "Local Video" %}
+              </div>  
+              <div class="panel-body nopadding">
+                {{ webrtc.localVideo() }}                
+              </div>
+              <div class="panel-body nopadding">
+                {{ webrtc.localAudioBar() }}                
+              </div>
+            </div>  
+          </div>
+          <div class="col-md-12">
+            <div id="inSessionInfo"></div>
+          </div>        
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}
+              </div>
+              <div class="panel-body">
+                <div class="pull-right"><span id="queueStateBadge" class="badge">
+                  <span id="queueClose" style="display: none; cursor: pointer;" title="{% trans "Close Queue" %}">{% trans "Opened" %}</span>
+                  <span id="queueOpen" style="display: none; cursor: pointer;" title="{% trans "Open Queue" %}">{% trans "Closed" %}</span></span>
+                </div>
+                <div><span class="glyphicon glyphicon-inbox"></span> {% trans "Queue State" %}</div>
+              </div>
+              <div class="panel-body nopadding">
+                <div id="queueDashboardTable"></div>
+              </div>
+            </div>
+          </div>          
+        </div>
+      </div>
+    </div>    
+{% endblock %}
+
+{% block scripts %}
+{{ callstats.init(config, user.email, meeting.token ~ "|expert") }}
+<script>
+
+$("#inSessionInfo").autoRefreshContent("{{ config.base_path }}/tut/getInSessionInfo/{{ session.token }}/html-short", 5000);
+
+$("#queueDashboardTable").autoRefreshContent("{{ config.base_path }}/tut/getSessionQueue/{{ session.token }}/html-short", 5000);
+
+var clientDisconnect = 0;
+var canExit = false;
+    
+$("#closeClient").click(function (event) {
+  event.preventDefault();  
+  registerMeetingDisconnect();  
+  setTimeout("closeWindowIfReady()", 1000);
+});
+
+function closeWindowIfReady()
+{
+  console.log("Is Window Ready to Close? " + (canExit?"Yes":"No"));
+  if (canExit) {
+    window.close();
+    modal_alert_block("{% trans "Meeting closed" %}", "<p>{% trans "Please close this window!" %}</p>");    
+    return true;
+  }
+  
+  setTimeout("closeWindowIfReady()", 1000); // Trigger back to 1 second in the future
+}
+
+$("#queueClose").click(function (event) {
+  event.preventDefault();  
+  getData("{{ config.base_path }}/api/meeting/{{ meeting.token }}/queueClose", function (data) {
+    updateQueueControlButtons(data);
+  });
+});
+
+$("#queueOpen").click(function (event) {
+  event.preventDefault();  
+  getData("{{ config.base_path }}/api/meeting/{{ meeting.token }}/queueOpen", function (data) {
+    updateQueueControlButtons(data);
+  });
+});
+    
+$("#queueDashboardTable").on('click', 'a.queue-action', function (event) {
+  event.preventDefault();  
+  putData($(this).data("url"));
+});
+
+$("#queueDashboardTable").on('click', 'a.call-action', function (event) {
+  event.preventDefault();  
+
+  console.log("Calling: " + $(this).data("peerjsid"));
+
+  putData($(this).data("url"));
+  
+  console.log("Calling: " + $(this).data("peerjsid"));
+  var call = peer.call($(this).data("peerjsid"), window.localStream);
+
+  conn=peer.connections[call.peer][0];
+  conn.pc.oniceconnectionstatechange = function(ev) {
+    if(ev.target.iceConnectionState=="failed") {
+      modal_alert_block('ICE {% trans "Connection Error!" %}', '<p>{% trans "Unable to establish the call." %}</p><p>{% trans "Tech support was notified." %}</p><p>{% trans "Please close the window and try again later." %}</p>');
+      getData("{{ config.base_path }}/api/session/{{ session.token }}/logEvent/peer-js-error/user-" + ev.target.iceConnectionState, function(data) { console.log("Data received: " + data); } );
+    }
+  };
+
+  webrtc_step3(call);
+});
+
+$("#inSessionInfo").on('click', 'a#requestHangup', function (event) {
+  event.preventDefault();  
+  putData($(this).data("url"));
+  window.existingCall.close();
+});
+
+// $("#currentQueue1").getContent("{{ config.base_path }}/api/getSessionQueueInfo/{{ session.token }}/html");
+
+// handle = $("#currentQueue2").autoRefreshContent("{{ config.base_path }}/api/getSessionQueueInfo/{{ session.token }}/html", 5000);
+
+// cancelAutoRefresh(handle);
+
+// Put the this on your browser to debug: 
+// > localStorage.debug = '*';
+
+
+socket = openSocket("https://{{ config.backend_host }}:{{ config.backend_port }}/");
+
+
+
+/*
+$("#currentQueue3").bindData(socket, "currentQueueInfo", function(data) {  
+  $("#currentQueue3").html(JSON.stringify(data));
+});
+$("#currentQueue4").bindContent(socket, "currentQueueInfo");
+
+$("#currentQueue5").bindData(socket, "currentQueueInfo", function(data) {  
+
+
+  var dataSet = [];
+  
+  data = data.queueDetail;
+  for ( var i=0 ; i < data.length ; i++ ) {
+    dataSet[i] = [];
+    dataSet[i][0] = data[i].id;
+    dataSet[i][1] = data[i].name;
+    dataSet[i][2] = data[i].waiting;
+  }
+
+
+  tableParams = {
+      language: {
+        url: "{{ config.base_path }}/assets/dataTables/{{ lang.locale }}.lang"
+      },
+      paging: false,
+      searching: false,
+      data: dataSet,
+      columns: [
+          { title: "ID" },
+          { title: "Name" },
+          { title: "Waiting" }
+      ]
+    }
+ 
+  tableHandle = $("#currentQueue5").data("tableHandle");
+  if (tableHandle)
+    tableHandle.destroy();
+  
+  tableHandle = $("#currentQueue5").DataTable( tableParams );    
+  $("#currentQueue5").data("tableHandle", tableHandle);
+});
+
+
+//  pullData(socket, "getCurrentQueueInfo", { info: 1 }, 5000);  
+  // sendData(socket, "registerToQueueChangeEvent", null);  
+*/
+  
+  var peer = new Peer({
+    host: '{{ config.backend_host }}',
+    port: {{ config.backend_port }}, 
+    path: '{{ config.backend_peerjs_path }}',        
+    config: {'iceServers': {{ iceTurnApi.getPeerJSConfig | raw }} },
+    debug: 3
+  });
+
+  peer.on('open', function(id) {
+    console.log(' ************ My peer ID is: ' + id);    
+    putData("{{ config.base_path }}/api/meeting/{{ meeting.token }}/register/" + id);
+    sendData(socket, "registerPeer", { "id" : peer.id, "name":"{{ ss.friendlyName }}", "participantType": "expert", "meetingToken": "{{ meeting.token }}", "sessionToken" : "{{ session.token }}" } );
+  });
+
+  peer.on('disconnected', function(id) {    
+    var hue = 'rgb(' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ')';
+    $(".remoteVideo").css("background-color", hue);
+  });
+  
+  peer.on('error', function(err) {
+    console.log("PeerJS Error: " + JSON.stringify(err));
+
+    {% if config.callstats_app_id is defined %}
+      if (err.type == "webrtc") {
+          callStats.reportError(call.peerConnection, "{{ session.token }}", callStats.webRTCFunctions.createOffer, err);
+      }      
+    {% endif %}
+    
+    if (err.type == "server-error") {
+      modal_alert_block("{% trans "Connection Error!" %}", "<p>{% trans "Unable to establish the call." %}</p><p><pre>" + err.type + "</pre></p><p>{% trans "Tech support was notified." %}</p><p>{% trans "Please close the window and try again later." %}</p>"); 
+    }
+
+    getData("{{ config.base_path }}/api/meeting/{{ meeting.token }}/logEvent/peer-js-error/expert-" + err.type, function(data) { console.log("Data received: " + data); } );
+  });
+   
+  socket.on('NotifyNewParticipantOnQueue', function(data) {
+    var eventSound=new Audio("{{ config.base_path }}/assets/sounds/participants_waiting.mp3",100,true); 
+    eventSound.play();
+  });
+
+  function registerMeetingDisconnect() {
+  
+    clientDisconnectURL = '{{ config.base_path }}/tut/meeting/close/{{ meeting.token }}/close';
+    if (clientDisconnect) {
+      clientDisconnectURL = '{{ config.base_path }}/tut/meeting/close/{{ meeting.token }}/disconnect';
+    }
+    
+    console.log("unload called! : " + clientDisconnectURL);
+    
+    $.ajax({
+      url: clientDisconnectURL,
+      type: 'PUT'      
+    }).done(function() { canExit = true; });    
+          
+    console.log("meeting updated on unload! " + canExit);
+
+  };
+      
+  function updateQueueControlButtons(data)
+  {    
+      console.log("DATA: " + data.status);
+      if (data.status == "waiting") {
+        $("#queueOpen").hide();
+        $("#queueClose").show();
+      } else {
+        $("#queueOpen").show();
+        $("#queueClose").hide();
+      }    
+  }  
+      
+  $( document ).ready(function() {
+    
+      putData("{{ config.base_path }}/tut/meeting/wait/{{ meeting.token }}");
+      webrtc_step1();
+      
+      getData("{{ config.base_path }}/api/meeting/{{ meeting.token }}/queueStatus", function (data) {
+        updateQueueControlButtons(data);
+      });
+            
+    }); 
+</script>
+{{ widget.modalJS() }}
+{{ chat.javascriptScript(session,ss) }}
+{{ webrtc.javascriptScript(config, session, meeting) }}
+{% endblock %}

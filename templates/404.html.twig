@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+{% block title %}404 {% trans "Page Not Found" %}{% endblock %}
+{% block container %}
+    <h1>404 {% trans "Page Not Found" %}</h1>
+    <p>{{ message|raw }}</p>
+    <a href="{{ config.base_path }}/">{% trans "Return to Home Page" %}</a>
+{% endblock %}

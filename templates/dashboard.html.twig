@@ -1,0 +1,140 @@
+{% import "widgets.html.twig" as widget %}
+{% extends "base.html.twig" %}
+{% block title %}{{ title }}{% endblock %}
+{% block container %}
+    <div class="row">      
+      <div class="col-md-2 col-xs-12">        
+      </div>
+      <div class="col-xs-10">
+        <h2>{{ session.title }}</h2> 
+      </div>
+      <div id="dashmenu" class="col-md-2 col-xs-12">
+        <div class="list-group">                
+          <a class="list-group-item list-group-item-info" target="expert-client" href="{{ config.base_path }}/tut/enter/{{ session.token }}">
+            {% trans "Open meeting" %}
+            <span class="qrCodeAction" target="expert-client" href="#" data-url="{{ config.full_url }}/tut/enter/{{ session.token }}"><span class="glyphicon glyphicon-qrcode"></span></span>
+          </a>
+          <a class="list-group-item" href="{{ config.base_path }}/tut/embbed/{{ session.token }}">{% trans "Embbed" %}</a>
+          <a class="list-group-item" href="{{ config.base_path }}/tut/messages/{{ session.token }}">{% trans "Messages" %}</a>
+          <a class="list-group-item" href="{{ config.base_path }}/tut/statistics/{{ session.token }}">{% trans "Statistics" %}</a>
+          <a class="list-group-item" href="{{ config.base_path }}/tut/edit/{{ session.token }}">{% trans "Edit" %}</a>
+          <a class="list-group-item list-group-item-danger" href="{{ config.base_path }}/tut/delete/{{ session.token }}">{% trans "Delete" %}</a>        
+        </div>
+      </div>
+      <div class="col-md-10 col-xs-12">
+          
+          <div clas="panel-group">        
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-right">                        
+                  <a href="{{ config.base_path }}/tut/vcalendar/{{ session.token }}/expert" title="{{ session.dateStart }} - {{ session.dateEnd }}"><span class="glyphicon glyphicon-calendar"></a>                
+                  <a data-toggle="collapse" href="#collapse_details_panel" title="{% trans "Expand" %}"><span class="glyphicon glyphicon-triangle-bottom"></a>                
+                </div>
+                <h3 class="panel-title">{% trans "Session Details" %}</h3>
+              </div>
+              <div id="collapse_details_panel" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <p>{% trans "Description" %}:</p>
+                  <p>{{ session.description }}</p>
+                </div>
+              </div>
+            </div>
+            
+          </div>  
+          <div id="currentMeetings"></div>
+          <div id="queueDashboardTable"></div>
+      </div>
+    </div>
+    
+    
+<div id="qrCode" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{% trans "QR Code to access meeting" %}</h4>
+      </div>
+      <div class="modal-body"><center>
+        <img id="qrCodeImg" src="">
+      </center></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->    
+    
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+$("#currentMeetings").on('click', 'a.qrCodeAction', function (event) {
+  event.preventDefault();
+  $('#qrCodeImg').attr('src', ("https://chart.googleapis.com/chart?cht=qr&chl=" + encodeURIComponent($(this).data("url")) + "&chs=300x300"));
+  $('#qrCode').modal('show');
+  
+});
+
+$("#dashmenu").on('click', 'span.qrCodeAction', function (event) {
+  event.preventDefault();
+  $('#qrCodeImg').attr('src', ("https://chart.googleapis.com/chart?cht=qr&chl=" + encodeURIComponent($(this).data("url")) + "&chs=300x300"));
+  $('#qrCode').modal('show');
+  
+});
+
+socket = openSocket("https://{{ config.backend_host }}:{{ config.backend_port }}/");
+
+$("#currentMeetings").autoRefreshContent("{{ config.base_path }}/tut/getSessionExperts/{{ session.token }}/html", 5000);
+
+$("#queueDashboardTable").autoRefreshContent("{{ config.base_path }}/tut/getSessionQueue/{{ session.token }}/html", 5000);
+    
+$("#queueDashboardTable").on('click', 'a.queue-action', function (event) {
+  event.preventDefault();  
+  putData($(this).data("url"));
+});
+
+/*
+
+$("#queueDashboardTable2").bindData(socket, "currentQueueInfo", function(data) {  
+
+  var dataSet = [];
+  
+  data = data.queueDetail;
+  for ( var i=0 ; i < data.length ; i++ ) {
+    dataSet[i] = [];
+    dataSet[i][0] = data[i].id;
+    dataSet[i][1] = data[i].name;
+    dataSet[i][2] = data[i].waiting;
+  }
+
+
+  tableParams = {
+      language: {
+        url: "{{ config.base_path }}/assets/dataTables/{{ lang.locale }}.lang"
+      },
+      paging: false,
+      searching: false,
+      data: dataSet,
+      columns: [
+          { title: "{% trans "ID" %}" },
+          { title: "{% trans "Name" %}" },
+          { title: "{% trans "Waiting" %}" }
+      ]
+    }
+ 
+  tableHandle = $("#queueDashboardTable2").data("tableHandle");
+  if (tableHandle)
+    tableHandle.destroy();
+  
+  tableHandle = $("#queueDashboardTable2").DataTable( tableParams );    
+  $("#queueDashboardTable2").data("tableHandle", tableHandle);
+
+});
+
+pullData(socket, "getCurrentQueueInfo", { info: 1 }, 5000);  
+  
+*/  
+  
+</script>
+{% endblock %}

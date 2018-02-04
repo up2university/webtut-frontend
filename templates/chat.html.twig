@@ -1,0 +1,69 @@
+{% macro chatPanel(session) %}
+<div id="chatMessages" class="collapse fade fadeOutElements">
+  <div id="chatMessagesContent" class="tab-content">
+    <div id="{{session.token}}" class="tab-pane fade in active">
+      <h4>{% trans "Group Chat" %}</h4>
+      <div id="{{session.token}}bottom"></div>
+    </div>
+  </div>
+  <div class="chatMessagesTabs">
+    <ul class="nav nav-tabs">
+      <li class='active'><a data-toggle="tab" href="#{{session.token}}">{{session.title}}</a></li>
+    </ul>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row fadeOutElements" id="chatInputBox">
+    <div class="col-xs-1" style="text-align:left;">
+      <button class="btn btn-default" data-toggle="collapse" data-target="#chatInput,#chatMessages">
+        <span class="glyphicon glyphicon-comment"></span>
+      </button>
+    </div>
+    <div class="col-xs-11 form-group" id="chatInputFormGroup" >
+      <form action="">
+        <input id="chatInput" type="text" class="form-control fade collapse" onfocus="chatSticky()" onblur="chatUnStick()" autocomplete="off" > 
+        </input>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro javascriptScript(session,ss) %}
+<script>
+  $('form').submit(function(){
+    socket.emit('chatMessage', { 'room': $('.tab-pane.active').attr('id'), 'user': '{{ ss.friendlyName }}', 'message': $('#chatInput').val() });
+    $('#chatInput').val('');
+    return false;
+  });
+  socket.on('chatMessage', function(msg){
+    console.log(msg);
+    if ( $("#" + msg.room).length == 0 ) { // room does not exist yet: create chat box and nav tabs
+      console.log('new Room joined!');
+      var newChatMessagesTab = $('<li></li>');
+      newChatMessagesTab.attr('id',msg.room);
+      newChatMessagesTab.append($('<a>' + msg.user  + '</a>').attr('data-toggle','tab').attr('href','#' + msg.room));
+      $('.nav.nav-tabs').append(newChatMessagesTab);
+      var newChatBox = $('<div></div>').attr('id',msg.room).attr('class',"tab-pane fade");
+      newChatBox.append($('<div></div>').attr('id',msg.room + 'bottom'));
+      $('#chatMessagesContent').append(newChatBox); 
+    }
+    if ( !( msg.message === ''  )) {
+      $('<p></p>').text(msg.user + ': ' + msg.message).insertBefore($('#' + msg.room + 'bottom'));
+//      $('<br>').insertBefore($('#' + msg.room + 'bottom'));
+      document.getElementById( msg.room + 'bottom' ).scrollIntoView(false);
+      console.log(msg);
+    }
+  });
+  function chatSticky() {
+    $("#chatMessages").removeClass("fadeOutElements");
+    $("#chatInputBox").removeClass("fadeOutElements");
+  }
+  function chatUnStick() {
+    $("#chatMessages").addClass("fadeOutElements");
+    $("#chatInputBox").addClass("fadeOutElements");
+
+  }
+
+</script>
+{% endmacro %}

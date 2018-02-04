@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% import "widgets.html.twig" as widget %}
+
+{% block cookies %}
+{% endblock %}
+
+{% block body %}
+<body class="client {{ getPageClasses() }}">
+{% block content %}
+<div class="container">
+{% block container %}
+{% endblock %}
+</div>
+{% endblock %}
+{% endblock %}
+
+{% block admin_scripts %}
+{% endblock %}
+

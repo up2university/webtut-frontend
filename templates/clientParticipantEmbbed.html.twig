@@ -1,0 +1,175 @@
+{% import "webrtc.html.twig" as webrtc %}
+{% extends "clientBase.html.twig" %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ session.cssurl }}">
+{% endblock %}
+
+{% block content %}
+<div id="client-app" class="client-app">
+
+   <div id="widget-disconnected" style="display: none;" class="client-block">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-disconnected-message" class="client-message"></div>
+     <a href="" class="btn btn-primary">{% trans "Request new call" %}</a>
+   </div>
+
+   <div id="widget-queue-closed" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-queue-closed-message" class="client-message"></div>
+   </div>
+
+   <div id="widget-closed" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-closed-message" class="client-message"></div>
+   </div>
+
+   <div id="widget-lurking-popped" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-lurking-popped-message" class="client-message">{% trans "Creating video window." %}</div>          
+   </div>
+   
+   <div id="widget-lurking" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-lurking-message" class="client-message"></div>
+     <div id="widget-lurking-queue-size" class="client-queue-info"></div>     
+     <a href="#" class="btn btn-primary" id="requestToEnterQueue">{% trans "Request to enter" %}</a>     
+   </div>
+
+   <div id="widget-kicked" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-kicked-message" class="client-message"></div>
+   </div>
+   
+   
+   <div id="widget-waiting-on-queue" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-waiting-on-queue-message" class="client-message"></div>
+     <div id="widget-waiting-queue-size"></div>
+   </div>
+   
+   <div id="widget-waiting-on-queue-popped" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-waiting-on-queue-popped-message" class="client-message"></div>
+     <div id="widget-waiting-queue-popped-size"></div>
+   </div>
+   
+   <div id="widget-deserted" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-deserted-message" class="client-message"></div>
+   </div>
+
+   <div id="widget-in-session" style="display: none;">
+     <h2 class="client-title">{{ session.title }}</h2>
+     <div id="widget-in-session-message" class="client-message"></div>
+     <center>
+       <div class="videoContainer">
+         {{ webrtc.remoteVideo() }}   
+       </div>
+     </center>
+     <a href="#" class="btn btn-primary" id="requestHangup">{% trans "Hangup" %}</a>
+   </div>
+
+   <!--
+   <div id="debug"></div>
+
+   <div class="client-footer-logos">
+     <a href="#" id="shareFacebook" title="{% trans "Share on facebook" %}"><i class="fa fa-facebook-official fa-2x"></i></a>
+     <a href="{{ config.base_path }}/tut/vcalendar/{{ session.token }}" title="{% trans "Download vCalendar file" %}: {{ session.dateStart }} - {{ session.dateEnd }}" title="{% trans "Get vcalendar file" %}"><i class="fa fa-calendar fa-2x"></i></i></a>
+     <a href="{{ config.base_path }}/tut/client/{{ session.token }}/qrcode" id="getQRCode" title="{% trans "Get QRCode and access using your mobile device" %}" target="_blank"><i class="fa fa-qrcode fa-2x"></i></i></a>
+   </div>
+   -->
+   
+   <div class="client-footer">
+     <a href="{{ config.base_path }}" target="_blank">{% trans "Powered by WebTUT" %}</a>
+   </div>
+   
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+
+  $("#getQRCode").click(function (data) {
+  });
+  
+  $("#shareFacebook").click(function (data) {
+  });
+  
+  var currentState = "";
+
+  socket = openSocket("https://{{ config.backend_host }}:{{ config.backend_port }}/");
+
+  $("#requestHangup").click(function(data) {
+    putData("{{ config.base_path }}/api/participant/requestHangup/{{ participant.token }}", null);
+    getData("{{ config.base_path }}/api/getParticipantInfo/{{ participant.token }}", function(data) {
+      updateWebTUTClient(data);
+    });
+    window.existingCall.close();
+  });
+
+  $("#requestToEnterQueue").click(function(data) {    
+   
+    getData("{{ config.base_path }}/api/getParticipantInfo/{{ participant.token }}", function(data) {
+      window.open("{{ config.base_path }}/embbed/{{ session.token }}/{{ participant.token }}", "_blank", "fullscreen=no,menubar=no,scrollbars=no,height=600,width=800,toolbar=no,titlebar=yes,status=no");      
+      updateWebTUTClient(data);
+    });
+  });
+      
+  function updateWebTUTClient(data) 
+  {
+  
+    if ((data.state == "waiting") || (data.state == "waiting-on-queue")) {
+        $("#widget-waiting-queue-size").getContent("{{ config.base_path }}/api/getParticipantQueueInfo/{{ participant.token }}/html");
+    }    
+
+    $("#widget-" + data.state + "-message").html(data.message);
+
+    // $("#debug").html("<pre>" + "<h2>Participant state: " + data.state + "</h2>" +           
+    //                 JSON.stringify(data) + Date.now() + " </pre>");
+
+    console.log(data.state + " <> " + currentState);    
+    
+    if (currentState != data.state) {
+    
+      if (currentState != "")
+        $("#widget-" + currentState).hide();
+      $("#widget-" + data.state).show();
+  
+      currentState = data.state;
+    } else {        
+    }
+
+  }
+
+  
+  $("#client-app").autoRefreshData("{{ config.base_path }}/api/getParticipantInfo/{{ participant.token }}", 5000, function(data) {
+      updateWebTUTClient(data);
+    });
+  
+  
+  $(function(){
+        
+    $( window ).on('beforeunload', function() {
+      
+      console.log("unload called! : " + '{{ config.base_path }}/api/participant/requestToLeaveQueue/{{ participant.token }}/unload');
+      
+      var can_exit = false;
+      
+      $.ajax({
+        url: '{{ config.base_path }}/api/participant/requestToLeaveQueue/{{ participant.token }}/unload',
+        type: 'PUT',
+        async: false
+      }).done(function() { can_exit = true; });    
+            
+      console.log("participant updated on unload! " + can_exit);
+      
+      return;
+    });
+
+  });
+
+</script>
+{{ webrtc.javascriptScript() }}
+{% endblock %}
+

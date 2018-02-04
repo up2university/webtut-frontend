@@ -1,0 +1,8 @@
+{% import "widgets.html.twig" as widget %}
+{% extends "base.html.twig" %}
+{% block title %}{{ ss.friendlyName }}{% endblock %}
+{% block container %}  
+  <h1>{{ ss.friendlyName }}</h1>    
+  {{ widget.table(ss) }}
+  <a href="{{ config.base_path }}/tut/my">{% trans "Return to Home Page" %}</a>    
+{% endblock %}

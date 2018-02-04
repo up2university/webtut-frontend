@@ -1,0 +1,25 @@
+{% import "widgets.html.twig" as widget %}
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <div class="pull-right"><span class="badge">{{ queue | length }}</span></div>
+    <div><span class="glyphicon glyphicon-inbox"></span> {% trans "Participants in queue" %}</div>
+  </div>
+{% if queue | length > 0 %}
+<table class="table table-striped">
+  <tr>    
+    <th nowrap>{% trans "State" %}</th>
+    <th width="100%">{% trans "Name" %}</th>
+    <th>{% trans "Time waiting" %}</th>
+    <th nowrap>{% trans "Action" %}</th>
+  </tr>  
+  {% for participation in queue %}
+  <tr>    
+    <td nowrap>{{ participation.queueState.name | translate }}</td>    
+    <td>{{ participation.participantName?participation.participantName:"anonymous"|translate }}@{{ participation.participantIP }}</td>
+    <td>{{ participation.getSecondsWaited | date("H:i:s") }}</td>
+    <td><a class="queue-action" href="#" data-url="{{ config.base_path }}/api/participant/kick/{{session.token}}/{{participation.token}}"><span class="glyphicon glyphicon-remove"></span></a></td>
+  </tr>  
+  {% endfor %}
+</table>
+{% endif %}
+</div>

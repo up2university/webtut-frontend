@@ -1,0 +1,30 @@
+{% import "widgets.html.twig" as widget %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="pull-right"><span class="badge">{{ session.currentState | translate }}</span></div>
+    <div><b>{% trans "Expert" %}</b></div>    
+  </div>
+{% if session.currentState != "closed" %}
+    
+      <table class="table table-striped">
+        <tr>
+          <th nowrap>{% trans "Started" %}</th>
+          <th nowrap>{% trans "State" %}</th>
+          <th width="100%">{% trans "Expert Name" %}</th>
+          <th nowrap>{% trans "Action" %}</th>
+        </tr>  
+        {% for meeting in meetings %}
+        <tr>
+          <td nowrap>{{ meeting.startTime|date("H:m:i") }}</td>    
+          <td>{{ meeting.meetingState.label | translate }}</td>
+          <td>{{ meeting.expert_name }}</td>
+          <td>
+            <a target="expert-client" href="{{ config.base_path }}/tut/enter/{{ session.token }}"><span class="glyphicon glyphicon-user"></span></a>
+            <a class="qrCodeAction" target="expert-client" href="#" data-url="{{ config.full_url }}/tut/enter/{{ session.token }}"><span class="glyphicon glyphicon-qrcode"></span></a>
+          </td>
+        </tr>  
+        {% endfor %}
+      </table>
+    
+{% endif %}
+</div>

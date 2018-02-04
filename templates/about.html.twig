@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+{% block container %}
+<div class="row">
+ <div class="col-sm-12">
+   <H1>{% trans "About" %}&nbsp;{{ config.app_name }}</H1>
+   <p>{{ description|raw }}</p>
+ </div> 
+</div>
+{% endblock %}

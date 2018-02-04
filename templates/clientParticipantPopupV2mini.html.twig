@@ -1,0 +1,364 @@
+{% extends "clientBase.html.twig" %}
+{% import "callstats_ui.macros.twig" as callstats %}
+{% import "widgets.html.twig" as widget %}
+{% import "webrtc.html.twig" as webrtc %}
+{% import "chat.html.twig" as chat %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ session.cssurl }}">
+{% endblock %}
+
+{% block content %}
+{{ widget.modalHTML() }}
+<div id="client-app" class="client-appV2 mini-client">
+   <div id="client-title" class="client-titleV2 fadeOutElements" >
+     <h2>{{ session.title }}</h2>  
+   </div>
+   {{ webrtc.localVideo() }}
+   {{ webrtc.remoteVideo() }}
+   <div id="smallVideoButtons" class="smallVideo fadeOutElements hidden" style="z-index:100;padding:5px;text-align:right;background-color:rgba(255,255,255,.2);font-size:1em">
+     <a id="fullScreenButton">
+       <span class="glyphicon glyphicon-fullscreen" style="font-size:0.8em"></span>
+     </a> 
+     <a id="stickyButton" ><span class="glyphicon glyphicon-pushpin"></span></a>
+     <a id="switchVideoButton"><span class="glyphicon glyphicon-resize-full"></span></a>
+   </div>
+   <!--<div class="chatContainer" class="fadeOutELements">
+     {{ chat.chatPanel(session) }}
+   </div>-->
+   <div class="bottom-right">
+     <div id="widget-disconnected" style="display: none;" class="client-block">
+       <div id="widget-disconnected-message" class="client-message"></div>
+       <div id="widget-rating" class="client-rating" style="padding:5px">
+         <a href="#" class="setMeetingRating" data-rating="1"><span class="glyphicon glyphicon-star-empty"></span></a>
+         <a href="#" class="setMeetingRating" data-rating="2"><span class="glyphicon glyphicon-star-empty"></span></a>
+         <a href="#" class="setMeetingRating" data-rating="3"><span class="glyphicon glyphicon-star-empty"></span></a>
+         <a href="#" class="setMeetingRating" data-rating="4"><span class="glyphicon glyphicon-star-empty"></span></a>
+         <a href="#" class="setMeetingRating" data-rating="5"><span class="glyphicon glyphicon-star-empty"></span></a>
+       </div>
+       <a href="{{ config.base_path }}/embbed/{{ session.token }}" class="btn btn-primary">{% trans "Request new call" %}</a>
+     </div>
+
+     <div id="widget-queue-closed" style="display: none;">
+       <div id="widget-queue-closed-message" class="client-message"></div>
+     </div>
+
+     <div id="widget-closed" style="display: none;">
+       <div id="widget-closed-message" class="client-message"></div>
+     </div>
+     
+     <div id="widget-lurking" style="display: none; padding:5px">
+       <div id="widget-lurking-message" class="client-message">{% trans "Please wait" %}</div>
+       <a href="#" class="btn btn-primary" id="requestToEnterQueue" style="width:100%">{% trans "Request to enter" %}</a>     
+     </div>
+
+     <div id="widget-kicked" style="display: none;">
+       <div id="widget-kicked-message" class="client-message"></div>
+     </div>
+
+     <div id="widget-waiting-on-queue" style="display: none;background-color:rgba(255,255,255,0.3);padding:5px;">
+       <div id="widget-waiting-on-queue-message" class="client-message "></div>
+       <div id="widget-waiting-queue-size"></div>
+       <div class="row"  style="margin:0px">
+         {{ webrtc.localAudioBar() }}
+         {{ webrtc.testAudio() }}
+         {% if ss.authenticated %}
+           {% trans "Student Name:" %}<br> {{ ss.friendlyName }}
+         {% else %}
+           {% trans "Student Name:" %} <br> <input type="text" id="studentFriendlyName" style="width:100%">
+         {% endif %}
+       </div>
+       <div class="row">
+         <a href="#" class="btn btn-primary" id="requestToLeaveQueue">{% trans "Cancel request" %}</a>
+       </div>
+     </div>
+     
+     <div id="widget-deserted" style="display: none;">
+       <div id="widget-deserted-message" class="client-message"></div>
+     </div>
+     <div id="widget-in-session" style="display: none;padding:5px">
+       <div id="widget-in-session-message" class="client-message"></div>
+       <div style="text-align:right;">
+         <a href="#" class="btn btn-primary fadeOutElements" id="requestHangup" >{% trans "Hangup" %}</a>
+       </div>
+     </div>
+   </div>
+   <div id="debug"></div>
+  
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+
+  $("#getQRCode").click(function (data) {
+  });
+  
+  $("#shareFacebook").click(function (data) {
+  });
+  
+  var currentState = "";
+  var waitingForKeyboard = true;
+  var fadeOutTimer; 
+  var hidingElementsStatus;
+
+  socket = openSocket("https://{{ config.backend_host }}:{{ config.backend_port }}/");
+
+  socket.on('error', function(err) {
+    console.log("Socket Error: " + JSON.stringify(err));
+    modal_alert_block("{% trans "Connection Error!" %}", "<p>{% trans "Unable to establish the call." %}</p><p><pre>" + err.type + "</pre></p><p>{% trans "Tech support was notified." %}</p><p>{% trans "Please close the window and try again later." %}</p>"); 
+    getData("{{ config.base_path }}/api/session/{{ session.token }}/logEvent/peer-js-error/socket-user-" + err.type, function(data) { console.log("Data received: " + data); } );      
+  });
+    
+  $("#studentFriendlyName").keyup(function(event) {
+  
+    if (waitingForKeyboard) {  
+      waitingForKeyboard = false;
+      setTimeout(function() {
+        putData("{{ config.base_path }}/api/setParticipantFrienldyName/{{ participant.token }}", { friendlyName: event.target.value });
+        waitingForKeyboard = true;
+      }, 1000);
+    }
+  });
+
+  $(".setMeetingRating").click(function(event) {
+    value = $(this).data('rating');
+    
+    {% if config.callstats_app_id is defined %}
+    
+    var feedback = {    
+      "userID": "{{ participant.token ~ "|user|" ~ participant.participantEmail }}", //mandatory
+      "overall": value, //mandatory
+    };
+    callStats.sendUserFeedback("{{ session.token }}", feedback, null);
+    {% endif %}
+    
+    $('.setMeetingRating').each(function() {
+        trating = $(this).data('rating');        
+        if (trating <= value) {
+          $(this).html('<span class="glyphicon glyphicon-star"></span>')
+        } else {
+          $(this).html('<span class="glyphicon glyphicon-star-empty"></span>')
+        }
+      }
+    );
+    
+    putData("{{ config.base_path }}/api/participant/rateMeeting/{{ participant.token }}", { rating : value });    
+  });
+  
+  $("#requestHangup").click(function(data) {
+    window.existingCall.close(); // PeerJS Hangup Call
+    putData("{{ config.base_path }}/api/participant/requestHangup/{{ participant.token }}", null);
+    getData("{{ config.base_path }}/api/getParticipantInfo/{{ participant.token }}", function(data) {
+      updateWebTUTClient(data);
+    });
+  });
+
+  $("#requestToEnterQueue").click(function(data) {   
+    putData("{{ config.base_path }}/api/participant/requestToEnterQueue/{{ participant.token }}", null);   
+    getData("{{ config.base_path }}/api/notify/{{ session.token }}/host", null);    
+  });
+
+  $("#requestToLeaveQueue").click(function(data) {
+    window.audioContext.close();
+    putData("{{ config.base_path }}/api/participant/requestToLeaveQueue/{{ participant.token }}/click", null);
+    getData("{{ config.base_path }}/api/getParticipantInfo/{{ participant.token }}", function(data) {
+      updateWebTUTClient(data);
+    });
+    window.close();
+  });
+  
+  handle = $("#client-app").autoRefreshData("{{ config.base_path }}/api/getParticipantInfo/{{ participant.token }}", 5000, function(data) {
+    updateWebTUTClient(data);
+  });
+
+  /// PEERJS
+  
+  var peer = new Peer({
+    host: '{{ config.backend_host }}',
+    port: {{ config.backend_port }}, 
+    path: '{{ config.backend_peerjs_path }}',        
+    config: {'iceServers': {{ iceTurnApi.getPeerJSConfig | raw }} },
+    debug: 3
+
+  });
+
+  peer.on('open', function(id) {
+    console.log(' ************ My peer ID is: ' + id);
+    putData("{{ config.base_path }}/api/participant/{{ participant.token }}/register/" + id);
+    sendData(socket, "registerPeer", { "id" : peer.id, "name":"{{ ss.friendlyName }}", "participantType": "participant", "sessionToken": "{{ session.token }}" } );  
+  });
+
+  peer.on('error', function(err) {
+    console.log("PeerJS Error: " + JSON.stringify(err));
+       
+    {% if config.callstats_app_id is defined %}
+      if (err.type == "webrtc") {
+          callStats.reportError(call.peerConnection, "{{ session.token }}", callStats.webRTCFunctions.createOffer, err);
+      }      
+    {% endif %}
+    
+    if (err.type == "server-error") {
+      modal_alert_block("{% trans "Connection Error!" %}", "<p>{% trans "Unable to establish the call." %}</p><p><pre>" + err.type + "</pre></p><p>{% trans "Tech support was notified." %}</p><p>{% trans "Please close the window and try again later." %}</p>"); 
+    }
+
+    getData("{{ config.base_path }}/api/meeting/{{ meeting.token }}/logEvent/peer-js-error/expert-" + err.type, function(data) { console.log("Data received: " + data); } );
+
+  });
+  
+  // Receiving a call
+  peer.on('call', function(call) {
+    console.log(' ************ Got a CALL!!');
+    call.answer(window.localStream);
+
+    conn=peer.connections[call.peer][0];
+    conn.pc.oniceconnectionstatechange = function(ev) {
+      if(ev.target.iceConnectionState=="failed") {
+        modal_alert_block('ICE {% trans "Connection Error!" %}', '<p>{% trans "Unable to establish the call." %}</p><p>{% trans "Tech support was notified." %}</p><p>{% trans "Please close the window and try again later." %}</p>'); 
+        getData("{{ config.base_path }}/api/session/{{ session.token }}/logEvent/peer-js-error/user-" + ev.target.iceConnectionState, function(data) { console.log("Data received: " + data); } );
+      }
+    };
+    
+    sendData(socket,"joinRoom",call.peer);
+    webrtc_step3(call);
+    $("#localVideo").removeClass("bigVideo");
+    $("#localVideo").addClass("smallVideo fadeOutElements");
+    $("#remoteVideo").removeClass("smallVideo");
+    $("#remoteVideo").addClass("bigVideo");
+    $("#widget-in-session").show();
+    $("video.smallVideo").on("click", switchVideos);
+    $("#smallVideoButtons").removeClass("hidden");
+  });
+    
+  function updateWebTUTClient(data) 
+  {
+  
+    // $("#debug").html("<pre>" + "<h2>Participant state: " + data.state + "</h2>" +           
+    //                 JSON.stringify(data) + " </pre>");
+
+    $("#widget-" + data.state + "-message").html(data.message);
+
+    console.log(data.state + " <> " + currentState);
+    
+    if ((data.state == "waiting") || (data.state == "waiting-on-queue")) {
+        //$("#widget-waiting-queue-size").getContent("{{ config.base_path }}/api/getParticipantQueueInfo/{{ participant.token }}/html");
+    }    
+      
+    if (currentState != data.state) {
+    
+      $("#widget-" + currentState).hide();
+      $("#widget-" + data.state).show();
+  
+      currentState = data.state;
+    } else {        
+    }
+  }
+
+  function switchVideos() {
+      id = $("video.smallVideo").attr("id");
+      $("video.bigVideo").removeClass("bigVideo").addClass("smallVideo fadeOutElements");
+      $("#"+id).removeClass("smallVideo").removeClass("fadeOutElements").addClass("bigVideo");
+      $("video.bigVideo").off("click");
+      $("video.bigVideo").attr("style","z-index:-1");
+      $("video.smallVideo").attr("style","z-index:3");
+      $("video.smallVideo").on("click", switchVideos);
+  }
+
+  function fadeOutElements() {
+    $(".fadeOutElements:not(.sticky)").fadeOut();
+    hidingElementsStatus = "hidden";
+  }
+
+  function fadeInElements() {
+    $("#client-title").fadeIn("fast");
+    $(".fadeOutElements").fadeIn("fast");
+    $("#chatInputBox").fadeIn("fast");
+    hidingElementsStatus = "visible";
+    fadeOutTimer = window.setTimeout(fadeOutElements, [4000]);
+  }
+
+  function onmousemoveAction () {
+    if ( hidingElementsStatus === "hidden" ) {
+      fadeInElements();
+    }
+    window.clearTimeout(fadeOutTimer);
+    fadeOutTimer = window.setTimeout(fadeOutElements, [4000]);
+  }
+  
+  function toggleStickyness() {
+    $("video.smallVideo").toggleClass("fadeOutElements"); 
+    $("#stickyButton").toggleClass("black");
+  }
+  
+  function toggleFullScreen() {
+    if (!document.fullscreenElement &&    // alternative standard method
+        !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  }
+
+  $(function(){
+    
+    $( window ).load(function() {
+      webrtc_step1();
+      $("#localVideo").addClass("bigVideo");
+      putData("{{ config.base_path }}/api/participant/requestToEnterQueue/{{ participant.token }}", null);
+      getData("{{ config.base_path }}/api/notify/{{ session.token }}/host", null);
+      getData("{{ config.base_path }}/api/getParticipantInfo/{{ participant.token }}", function(data) {
+        updateWebTUTClient(data);
+      });
+      fadeOutTimer = window.setTimeout(fadeOutElements, [3000]);
+      $("#client-app").on("mousemove",onmousemoveAction );
+      document.addEventListener("keydown", function(e) {
+        if (e.keyCode == 70) { // key"f"
+          if ( $("#chatInputBox").hasClass("fadeOutElements") ) toggleFullScreen(); // only if there is no keyboard focus on chat 
+        }
+      }, false);
+      $("#fullScreenButton").on("click", toggleFullScreen );
+      $("#stickyButton").on("click", toggleStickyness );
+      $("#switchVideoButton").on("click", switchVideos );
+    });
+    
+    $( window ).on('beforeunload', function() {
+      
+      console.log("unload called! : " + '{{ config.base_path }}/api/participant/requestToLeaveQueue/{{ participant.token }}/unload');
+      
+      var can_exit = false;
+      
+      $.ajax({
+        url: '{{ config.base_path }}/api/participant/requestToLeaveQueue/{{ participant.token }}/unload',
+        type: 'PUT',
+        async: false
+      }).done(function() { can_exit = true; });    
+            
+      console.log("participant updated on unload! " + can_exit);
+      
+      return;
+    });
+
+  });
+
+</script>
+{{ widget.modalJS() }}
+{{ webrtc.javascriptScript(config, session, meeting) }}
+{{ callstats.init(config, participant.participantEmail, participant.token ~ "|user") }}
+{% endblock %}
+

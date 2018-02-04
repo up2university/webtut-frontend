@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt_PT" ng-app="WebTutApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WebTutoring App using WebRTC">
+    <meta name="author" content="Rui Ribeiro">
+        <link rel="shortcut icon" href="/webtut/assets/ico/favicon.ico">
+
+    <title>Webtutoring App using WebRTC</title>
+
+    <!-- Custom styles for this template -->
+    <link href="/webtut/css/vendor/app.css" rel="stylesheet">
+    <link href="/webtut/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="/webtut/css/app_custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->    
+    
+</head>
+
+<body class="webtut home">
+
+<div class="container">
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/webtut/js/socket.io.js"></script>
+<script src="/webtut/js/peer.js"></script>
+<script src="/webtut/js/jquery.dataTables.min.js"></script>
+<!-- Check for jQuery and Bootstrap, load them locally if they don't exist -->
+<script>if(!window.jQuery){document.write('<script src="/webtut/js/jquery-1.11.3.min.js"><\/script>')};</script>
+<script>if(typeof $.fn.emulateTransitionEnd != 'function'){document.write('<script src="/webtut/js/bootstrap.min.js"><\/script>')};</script>
+<script src="/webtut/js/app.js"></script>
+
+<script type="text/javascript">
+  
+</script>
+
+
+</html>

@@ -1,0 +1,15 @@
+{% import "widgets.html.twig" as widget %}
+{% extends "base.html.twig" %}
+{% block title %}{{ session.title }}}{% endblock %}
+{% block container %}
+    <h1>{{ session.title }}</h1>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ widget.table(statistics) }}        
+      </div>
+      <div class="col-xs-12">
+        {{ widget.table(session) }}        
+      </div>
+    </div>
+    <a href="{{ config.base_path }}/tut/dashboard/{{ session.token }}">{% trans "Return to dashboard" %}</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% import "widgets.html.twig" as widget %}
+{% if queue | length == 0 %}
+<table class="table table-striped">
+  <tr>    
+    <td class="center">{% trans "No participants waiting" %}</th>
+  </tr>
+</table>
+{% else %}
+<table class="table table-striped">
+  <tr>    
+    <th>{% trans "Action" %}</th>
+    <th width="100%">{% trans "Name" %}</th>
+    <th nowrap>{% trans "Waiting for" %}</th>
+  </tr>  
+  {% for participation in queue %}
+  <tr>    
+    <th style="text-align: center;">
+      <a class="call-action" href="#"  title="{% trans "Accept call" %}" data-peerjsid="{{ participation.peerJSId }}" data-url="{{ config.base_path }}/api/participant/call/{{session.token}}/{{participation.token}}"><span class="glyphicon glyphicon glyphicon-earphone" style="color: green;"></span></a> 
+      <a class="queue-action" href="#" title="{% trans "Remove user" %}" data-url="{{ config.base_path }}/api/participant/kick/{{session.token}}/{{participation.token}}"><span class="glyphicon glyphicon-remove"  style="color: red;"></span></a> 
+    </th>
+    <td>
+      {{ participation.participantName?participation.participantName:"anonymous"|translate }}
+    </td>
+    <td style="text-align: center;">{{ participation.getSecondsWaited | date("H:i:s") }}</td>
+  </tr>  
+  {% endfor %}
+</table>
+{% endif %}

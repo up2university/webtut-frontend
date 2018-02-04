@@ -1,0 +1,54 @@
+
+{% macro init(config, userId, userLocation) %}  
+
+  {% if config.callstats_app_id is defined %}
+  <script src="https://api.callstats.io/static/callstats.min.js" />
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/1.5.0/sha.js"></script>
+
+  <script>
+      
+    var reportType = {
+      inbound: 'inbound',
+      outbound: 'outbound'
+    };
+
+    // callback function to receive the stats
+    var callstats_Callback = function (stats) {
+      var ssrc;
+      for (ssrc in stats.streams) {
+        console.log("SSRC is: ", ssrc);
+        var dataSsrc = stats.streams[ssrc];
+        console.log("SSRC Type ", dataSsrc.reportType);
+        if (dataSsrc.reportType === reportType.outbound) {
+          console.log("RTT is: ", dataSsrc.rtt);
+        } else if (dataSsrc.reportType === reportType.inbound) {
+          console.log("Inbound loss rate is: ", dataSsrc.fractionLoss);
+        }
+      }
+    }
+
+    var CallStatsAppID     = "{{ config.callstats_app_id }}";
+    var CallStatsAppSecret = "{{ config.callstats_app_secret }}";
+    var UserID             = "{{ userLocation }}|{{ userId }}";
+      
+    function initCallback (err, msg) {
+      console.log("Initializing Status: err="+err+" msg="+msg);
+    }
+    
+    var configParams = {
+      disableBeforeUnloadHandler: true, // disables callstats.js's window.onbeforeunload parameter.
+      applicationVersion: "1.0" // Application version specified by the developer.
+    };
+    
+    var callStats = new callstats(null,io,jsSHA);  
+        
+    // userID is generated or given by the
+    // origin server
+    callStats.initialize(CallStatsAppID, CallStatsAppSecret, UserID, initCallback, callstats_Callback, configParams);
+    
+  </script>
+ 
+  {% endif %}
+{% endmacro %}
+

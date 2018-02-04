@@ -1,0 +1,217 @@
+DROP DATABASE IF EXISTS webtut;
+
+CREATE DATABASE webtut DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ 
+USE webtut;
+
+CREATE TABLE IF NOT EXISTS session (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  title varchar(128) NOT NULL,
+  description varchar(255) NOT NULL,
+  createdAt timestamp NOT NULL,
+  dateStart date NOT NULL,
+  dateEnd date NOT NULL,
+  maxQueue int(10) NOT NULL,
+  sessionQueueStrategy_id int(10) NOT NULL, 
+  mustAuthenticate integer NOT NULL,
+  visibleToAll integer NOT NULL,
+  active int(1) NOT NULL,
+  activeMonday int(1) NOT NULL,
+  activeTuesday int(1)NOT NULL,
+  activeWednesday int(1)NOT NULL,
+  activeThursday int(1)NOT NULL,
+  activeFriday int(1)NOT NULL,
+  activeSaturday int(1)NOT NULL,
+  activeSunday int(1)NOT NULL,
+  repeatMonday time NOT NULL,
+  repeatTuesday time NOT NULL,
+  repeatWednesday time NOT NULL,
+  repeatThursday time NOT NULL,
+  repeatFriday time NOT NULL,
+  repeatSaturday time NOT NULL,
+  repeatSunday time NOT NULL,
+  frameWidth int(10) NOT NULL,
+  frameHeight int(10) NOT NULL,
+  duration time NOT NULL,
+  owner_id int(10) NOT NULL,
+  token varchar(128) NOT NULL, INDEX (token),
+  sessionLayout_id int(10) NOT NULL,
+  cssurl varchar(255) NOT NULL,
+  notifyHost int(10) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS meeting (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT, 
+  session_id int(10) unsigned NOT NULL,
+  expert_id int(10) NOT NULL,
+  expert_name varchar(128) NOT NULL,
+  startTime datetime,
+  endTime datetime,
+  meetingState_id int(10) NOT NULL,
+  token varchar(128) NOT NULL, INDEX (token),
+  peerJSId varchar(128),
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS participation (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  session_id int(10) unsigned NOT NULL,
+  meeting_id int(10) unsigned,
+  participantIP varchar(128),
+  participantName varchar(128),
+  participantEmail varchar(128),
+  user_id int(10),
+  registered timestamp NOT NULL DEFAULT 0,
+  startTime datetime,
+  endTime datetime,
+  feedback int(10) unsigned,
+  secondsWaited int(10) unsigned,
+  queueState_id int(10) NOT NULL,
+  peerJSId varchar(128),
+  token varchar(128) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS meetingState (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  label varchar(128) NOT NULL,
+  name varchar(128) NOT NULL,
+  sessionMessageTypeLabel varchar(128),
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS queueState (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  label varchar(128) NOT NULL,
+  name varchar(128) NOT NULL,
+  waiting int(10) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS appLog (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  label varchar(128) NOT NULL,
+  timestamp timestamp NOT NULL,
+  logEntityType_id int(10) NOT NULL,
+  entity_id int(10),
+  entity varchar(1024),
+  session_id int(10),
+  meeting_id int(10),
+  participation_id int(10),
+  user_id int(10),
+  param varchar(256),
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS logEntityType (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  label varchar(128) NOT NULL,
+  name varchar(128) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS sessionMessage (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  session_id int(10) unsigned NOT NULL,
+  sessionMessageType_id int(10) NOT NULL,
+  message varchar(256) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS sessionMessageType (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  label varchar(128) NOT NULL,
+  name varchar(128) NOT NULL,
+  `order` int(10) unsigned NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS user (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  email varchar(128) NOT NULL,
+  name varchar(128) NOT NULL,
+  localUser int(10) NOT NULL,
+  authSource varchar(128) NOT NULL,
+  createdAt datetime NOT NULL,
+  lastLogin datetime NOT NULL,
+  inSession int(10) NOT NULL,
+  sessionCount int(10) NOT NULL,
+  locale varchar(32) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS sessionQueueStrategy (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  label varchar(128) NOT NULL,
+  name varchar(128) NOT NULL,
+  defaultStrategy int(10) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS sessionLayout (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  label VARCHAR(128) NOT NULL,
+  name VARCHAR(128) NOT NULL,
+  defaultLayout INT(10) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS refered (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,  
+  session_id int(10),
+  url varchar(256) NOT NULL,
+  views int(10),  
+  requests int(10),  
+  calls int(10),  
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+insert into queueState (label, name, waiting) values ('lurking', 'Lurking the queue', 0);
+insert into queueState (label, name, waiting) values ('waiting-on-queue', 'Waiting for expert', 1);
+insert into queueState (label, name, waiting) values ('waiting-on-queue-high-priority', 'Waiting with Priority', 1);
+insert into queueState (label, name, waiting) values ('waiting-on-queue-low-priority', 'Waiting without Priority', 1);
+insert into queueState (label, name, waiting) values ('in-session', 'In Session', 0);
+insert into queueState (label, name, waiting) values ('on-hold', 'On Hold', 1);
+insert into queueState (label, name, waiting) values ('disconnected', 'Disconnected after session', 0);
+insert into queueState (label, name, waiting) values ('gave-up', 'Gave Up', 0);
+insert into queueState (label, name, waiting) values ('queue-full', 'Rejected, queue full', 0);
+insert into queueState (label, name, waiting) values ('kicked', 'Rejected, kicked and blocked', 0);
+
+insert into meetingState (label, name, sessionMessageTypeLabel) values ('opened', 'Opened no one on-line', NULL);
+insert into meetingState (label, name, sessionMessageTypeLabel) values ('waiting', 'Expert waiting for participants', 'meeting-waiting');
+insert into meetingState (label, name, sessionMessageTypeLabel) values ('closed', 'Closed', 'meeting-closed');
+insert into meetingState (label, name, sessionMessageTypeLabel) values ('in-session', 'In Session', 'meeting-in-session');
+insert into meetingState (label, name, sessionMessageTypeLabel) values ('deserted', 'Participant Waiting for expert', 'meeting-deserted');
+insert into meetingState (label, name, sessionMessageTypeLabel) values ('queue-closed', 'Not accepting new participants', 'meeting-queue-closed');
+insert into meetingState (label, name, sessionMessageTypeLabel) values ('queue-full', 'The maximum number of queued participants has been reached', 'meeting-queue-full');
+
+insert into sessionMessageType(label, name, `order`) values ('session-lurking', 'Session Lurking', 1);
+insert into sessionMessageType(label, name, `order`) values ('session-waiting-on-queue', 'Meeting Waiting on Queue', 2);
+insert into sessionMessageType(label, name, `order`) values ('session-in-session', 'In Session', 3);
+insert into sessionMessageType(label, name, `order`) values ('meeting-closed', 'Meeting Closed', 4);
+insert into sessionMessageType(label, name, `order`) values ('meeting-deserted', 'Meeting Deserted', 5);
+insert into sessionMessageType(label, name, `order`) values ('meeting-queue-closed', 'Meeting Queue Closed', 6);
+insert into sessionMessageType(label, name, `order`) values ('meeting-queue-full', 'Meeting Queue Full', 7);
+insert into sessionMessageType(label, name, `order`) values ('session-disconnected', 'Session Disconnected', 8);
+insert into sessionMessageType(label, name, `order`) values ('session-kicked', 'User was removed from queue', 9);
+
+insert into logEntityType (label, name) values ('Null', '');
+insert into logEntityType (label, name) values ('Session', '');
+insert into logEntityType (label, name) values ('Meeting', '');
+insert into logEntityType (label, name) values ('User', '');
+insert into logEntityType (label, name) values ('Participation', '');
+
+insert into sessionQueueStrategy (label, name, defaultStrategy) values ('FIFO', 'First in, first out', 1);
+insert into sessionQueueStrategy (label, name, defaultStrategy) values ('LIFO', 'Last in, first out', 0);
+insert into sessionQueueStrategy (label, name, defaultStrategy) values ('Expert Pick', 'Expert picks next participant.', 0);
+
+insert into sessionLayout (label, name, defaultLayout) values ('embed', 'Embed - Within Webpage', 0);
+insert into sessionLayout (label, name, defaultLayout) values ('popup', 'Popup - On a popup Window', 1);
+insert into sessionLayout (label, name, defaultLayout) values ('embed-autostart', 'Embed Autostart - Within webpage, student starts with video autostarted', 2);
+
+
+

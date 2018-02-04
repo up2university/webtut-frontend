@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body bgcolor="#e0e0e0">
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e0e0e0">
+      <tbody>
+        <tr>  
+          <td>
+          
+            <table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <img style="HEIGHT: 40px; WIDTH: 700px; DISPLAY: block" src="cid:top" width=700 height=40 >
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+                      <tbody>
+                        <tr>
+                          <td><img width=20 height=1 src="cid:spacer"></td>
+                          <td>
+                  
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+                              <tbody>
+                                <tr>
+                                  <td cellpadding="10">
+                                    <font size="5" face="Arial"><strong>{subject}</strong></font><br/>
+                                  </td>
+                                  <td>
+                                    <img src="cid:logo" width=60 height=60>
+                                  </td>                        
+                                </tr>
+                                <tr>
+                                  <td colspan="2">
+                                    <img width=640 height=20 src="cid:spacer">
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">
+                                    <font face="Arial">
+                                      {html_message}
+                                    </font>                          
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">
+                                    <img width=640 height=20 src="cid:spacer">
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">
+                                  
+                                    <table width="100%">
+                                      <tbody>
+                                        <tr>
+                                          <td width="50%">
+                                            <font color="black" face="Arial, Helvetica, sans-serif" size="2"><b>FCT|FCCN {year}</b></font>                  
+                                          </td>
+                                          <td width="50%" align="right">
+                                            <font color="black" face="Arial, Helvetica, sans-serif" size="2"><a href="{baseurl}">{baseurl}</a>
+                                            <br/>
+                                            <font color="black" face="Arial, Helvetica, sans-serif" size="2"><a href="mailto:{servicecontact}">{servicecontact}</a></font>                                    
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">
+                                    <img width=640 height=1 src="cid:spacer">
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                          </td>
+                          <td><img width=20 height=1 src="cid:spacer"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img style="HEIGHT: 40px; WIDTH: 700px; DISPLAY: block" src="cid:bottom" width=700 height=40 >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+                    
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+

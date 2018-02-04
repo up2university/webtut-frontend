@@ -1,0 +1,11 @@
+var thisScript = document.scripts[document.scripts.length - 1];
+var iframe = document.createElement('iframe');
+iframe.width={% if session.frameWidth == 0 %}"100%"{% else %}{{ session.frameWidth }}{% endif %};
+iframe.height={{ session.frameHeight }};
+iframe.scrolling="no";
+iframe.frameBorder=0;
+iframe.seamless='seamless';
+iframe.id = 'webtut_{{ session.token }}';
+iframe.src = '{{config.full_url}}/embbed/{{ session.token }}/client';
+var parent = thisScript.parentElement;
+parent.replaceChild(iframe, thisScript);

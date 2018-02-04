@@ -1,0 +1,1046 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-26 17:34+0000\n"
+"PO-Revision-Date: 2015-11-26 17:34+0000\n"
+"Last-Translator: Rui Ribeiro <rui.ribeiro@fccn.pt>\n"
+"Language-Team: Rui Ribeiro <rui.ribeiro@fccn.pt>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../cache/59/590bed6c1b0d1281576b59dc3066f7a64c6e62ed60d32bb54b15c2c558f8848c.php:35
+msgid "About"
+msgstr "Sobre o"
+
+#: ../cache/73/73a199958e9bfd3c604ab660fef47911041a707ec4e50befcb05f4b8d20af033.php:59
+msgid "Accept call"
+msgstr "Aceitar chamada"
+
+#: ../cache/37/37c29bc81d1baa941a9019cddeffc7f3d7d3e00878d8c6e7b825f1665f4c04fc.php:53
+#: ../cache/18/18456becc5b9d14651f3473a4a6a1b1adc258d2361259f0585b1e5b223c7f84b.php:52
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:319
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:425
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:326
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:432
+#: ../cache/c5/c598b7e9b95c14907c1f2c5473a48895aea0e43619ddb4b291e9bfb218ad8cc2.php:38
+msgid "Action"
+msgstr "Acção"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:521
+msgid "Active"
+msgstr "Ativo"
+
+#: ../cache/2a/2ab5eccf0eaa54dc5997100b75ce0197f047e978547bc5e557812eff92ffb21b.php:35
+#: ../cache/2a/2ab5eccf0eaa54dc5997100b75ce0197f047e978547bc5e557812eff92ffb21b.php:43
+msgid "Administration"
+msgstr "Administração"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:415
+msgid "Administrator"
+msgstr "Administrador"
+
+#: ../app/routes/tut.php:142
+msgid "All TUTs available"
+msgstr "Todos os TUTs disponíveis"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:314
+msgid "All Tut's"
+msgstr "Todos Tuts"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:543
+msgid "Authentication"
+msgstr "Autenticação"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:388
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:495
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:590
+msgid "Back"
+msgstr "Voltar"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:65
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:70
+msgid "CSS URL"
+msgstr "CSS URL"
+
+#: ../cache/7c/7c0c41b828af981a786b0531d3554311d5cb99f33378f0d236636e30de7612e0.php:148
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:161
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:159
+msgid "Cancel request"
+msgstr "Cancelar pedido"
+
+#: ../app/libs/WebMailer.php:45
+msgid "Cannot set or reset variable: "
+msgstr "Não é possível definir ou limpar a variavel: "
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:174
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:667
+msgid "Close"
+msgstr "Fechar"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:55
+msgid "Close Meeting"
+msgstr "Fechar Reunião"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:127
+msgid "Close Queue"
+msgstr "Fechar Fila"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:135
+#: ../cache/db_dump.php:13
+msgid "Closed"
+msgstr "Fechado"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:200
+msgid "Code to embbed on your webpage as an iFrame"
+msgstr "Código para incluir na sua página Web como um iFrame"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:192
+msgid "Code to embbed on your webpage as script"
+msgstr "Código para incluir na sua página Web como um Script"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:184
+msgid "Code to link on your webpage"
+msgstr "Código para incluir na sua página Web"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:69
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:408
+msgid "Configuration"
+msgstr "Configuração"
+
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:214
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:407
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:436
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:246
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:416
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:212
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:405
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:434
+msgid "Connection Error!"
+msgstr "Erro de ligação!"
+
+#: ../app/libs/WebMailer.php:34
+msgid "Could not access file: "
+msgstr "Não foi possível abrir o ficheiro: "
+
+#: ../app/libs/WebMailer.php:33
+msgid "Could not execute: "
+msgstr "Não foi possível executar: "
+
+#: ../app/libs/WebMailer.php:37
+msgid "Could not instantiate mail function."
+msgstr "Não foi possível instanciar a função mail."
+
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:83
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:83
+msgid "Creating video window."
+msgstr "Criando janela de video."
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:485
+msgid "Credits"
+msgstr "Créditos"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:76
+msgid "Custom Style Sheet URL:"
+msgstr "URL da folha de estilos CSS:"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:65
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:146
+msgid "Dates"
+msgstr "Datas"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:107
+msgid "Delete"
+msgstr "Apagar"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:141
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:114
+msgid "Description"
+msgstr "Descrição"
+
+#: ../cache/db_dump.php:41
+#, fuzzy
+msgid "Deutch flag"
+msgstr "Bandeira Holandesa"
+
+#: ../models/Session.php:221
+msgid "Disabled by owner."
+msgstr "Desativado pelo dono."
+
+#: ../cache/db_dump.php:24
+msgid "Disconnected after session"
+msgstr "Desconectado depois da sessão"
+
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:169
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:169
+msgid "Download vCalendar file"
+msgstr "Descarregar ficheiro vCalendar"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:189
+msgid "Duration"
+msgstr "Duração"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:99
+msgid "Edit"
+msgstr "Editar"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:33
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:45
+msgid "Edit TUT"
+msgstr "Editar WebTUT"
+
+#: ../app/routes/api.php:508
+msgid "Email"
+msgstr "e-mail"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:75
+msgid "Embbed"
+msgstr "Integrar"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:171
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:180
+msgid "End date"
+msgstr "Data de fim"
+
+#: ../cache/db_dump.php:36
+msgid "English flag"
+msgstr "Bandeira Inglesa"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:80
+msgid "Example"
+msgstr "Exemplo"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:129
+msgid "Expand"
+msgstr "Expandir"
+
+#: ../cache/37/37c29bc81d1baa941a9019cddeffc7f3d7d3e00878d8c6e7b825f1665f4c04fc.php:29
+msgid "Expert"
+msgstr "Perito"
+
+#: ../cache/37/37c29bc81d1baa941a9019cddeffc7f3d7d3e00878d8c6e7b825f1665f4c04fc.php:49
+msgid "Expert Name"
+msgstr "Nome do perito"
+
+#: ../cache/db_dump.php:30
+msgid "Expert picks next participant."
+msgstr "Especialista selecciona próximo participante"
+
+#: ../cache/db_dump.php:12
+msgid "Expert waiting for participants"
+msgstr "Especialista aguardando por participantes"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:111
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:117
+msgid "False"
+msgstr "Falso"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:421
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:428
+msgid "Features"
+msgstr "Funcionalidades"
+
+#: ../app/libs/WebMailer.php:35
+msgid "File Error: Could not open file: "
+msgstr "Erro: não foi possívle abrir o ficheiro: "
+
+#: ../cache/db_dump.php:28
+msgid "First in, first out"
+msgstr "Primeiro a entrar, primeiro a sair"
+
+#: ../cache/db_dump.php:40
+msgid "French flag"
+msgstr "Bandeira Francesa"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:309
+msgid "Friday"
+msgstr "Sexta-feira"
+
+#: ../cache/db_dump.php:25
+msgid "Gave Up"
+msgstr "Disistiu"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:124
+msgid "Geometry"
+msgstr "Geometria"
+
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:183
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:183
+msgid "Get QRCode and access using your mobile device"
+msgstr "Obter o QRCode e aceder usando o seu dispositivo móvel"
+
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:175
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:175
+msgid "Get vcalendar file"
+msgstr "Obter o ficheiro vCalendar"
+
+#: ../cache/88/88943ff571f655762991c59a1185626e668dae62ac09d3dd259092523ce05146.php:44
+msgid "Group Chat"
+msgstr "Grupo"
+
+#: ../cache/7c/7c0c41b828af981a786b0531d3554311d5cb99f33378f0d236636e30de7612e0.php:181
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:151
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:174
+#: ../cache/91/915dd096fa238edee50d4d56090d27de7b5646c3d224afd6223ababb854891e0.php:63
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:151
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:172
+msgid "Hangup"
+msgstr "Desligar"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:156
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:315
+msgid "Height"
+msgstr "Altura"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:479
+msgid "Help"
+msgstr "Ajuda"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:280
+msgid "Home"
+msgstr "Início"
+
+#: ../cache/db_dump.php:38
+msgid "Hugarian flag"
+msgstr "Bandeira Hungara"
+
+#: ../cache/a9/a953025a2e3596a8d8eb560643cf86cff412c79464327ee628661ae467d71a6f.php:74
+msgid "I want to enter in session"
+msgstr "Eu quero entrar em sessão"
+
+#: ../cache/a9/a953025a2e3596a8d8eb560643cf86cff412c79464327ee628661ae467d71a6f.php:57
+msgid "I want to set a session"
+msgstr "Eu quero definir uma sessão"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:260
+msgid "ID"
+msgstr "ID"
+
+#: ../cache/91/915dd096fa238edee50d4d56090d27de7b5646c3d224afd6223ababb854891e0.php:27
+#: ../cache/db_dump.php:4 ../cache/db_dump.php:14 ../cache/db_dump.php:22
+msgid "In Session"
+msgstr "Em sessão"
+
+#: ../app/libs/WebMailer.php:38
+msgid "Invalid address"
+msgstr "Endereço inválido"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:327
+msgid "Language"
+msgstr "Idioma"
+
+#: ../cache/db_dump.php:29
+msgid "Last in, first out"
+msgstr "Último a entrar, primeiro a sair"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:115
+msgid "Layout to be used on the embed interface."
+msgstr "Layout para ser usado no interface integrado"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:95
+msgid "Local Video"
+msgstr "Video local"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:450
+msgid "Login"
+msgstr "Entrar"
+
+#: ../cache/d4/d46d428ece17f2c91f8a38735fa50e3f29df341d1b0860a0dc82dc11b8e56e31.php:40
+msgid "Login Failed"
+msgstr "Registo falhou"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:427
+msgid "Logout"
+msgstr "Sair"
+
+#: ../cache/db_dump.php:18
+msgid "Lurking the queue"
+msgstr "Espreitando a fila"
+
+#: ../app/libs/WebMailer.php:39
+msgid "Mailer is not supported."
+msgstr "Mailer não é suportado."
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:61
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:83
+msgid "Main"
+msgstr "Principal"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:415
+msgid "Max number of students waiting"
+msgstr "Número máximo de estudantes esperando"
+
+#: ../cache/db_dump.php:5
+msgid "Meeting Closed"
+msgstr "Reunião fechada"
+
+#: ../cache/db_dump.php:6
+msgid "Meeting Deserted"
+msgstr "Espreitando sessão, sem professor"
+
+#: ../cache/db_dump.php:7
+msgid "Meeting Queue Closed"
+msgstr "Fila de espera para a sessão fechada"
+
+#: ../cache/db_dump.php:8
+msgid "Meeting Queue Full"
+msgstr "Fila de espera para a sessão cheia"
+
+#: ../cache/db_dump.php:3
+#, fuzzy
+msgid "Meeting Waiting on Queue"
+msgstr "Esperando na fila"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:192
+msgid "Meeting closed"
+msgstr "Reunião fechada"
+
+#: ../app/libs/WebMailer.php:31
+msgid "Message body empty"
+msgstr "O corpo da mensagem é vazio"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:83
+msgid "Messages"
+msgstr "Mensagens"
+
+#: ../cache/90/9034d4b0b63e69518a4f727b9f1834c5e2c9e49d72d3d52fced4ac0062ee12d3.php:45
+msgid "Messages for session: "
+msgstr "Mensagens para sessão: "
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:209
+msgid "Monday"
+msgstr "Segunda-feira"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:513
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:517
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:520
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:524
+msgid "More about..."
+msgstr "Mais acerca de..."
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:311
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:318
+msgid "Must Authenticate"
+msgstr "Autenticação obrigatória"
+
+#: ../app/routes/tut.php:128
+msgid "My TUT List"
+msgstr "A minha lista de TUTs"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:306
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:399
+msgid "My Tut's"
+msgstr "Os meus Tuts"
+
+#: ../app/routes/api.php:507
+#: ../cache/18/18456becc5b9d14651f3473a4a6a1b1adc258d2361259f0585b1e5b223c7f84b.php:44
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:264
+#: ../cache/c5/c598b7e9b95c14907c1f2c5473a48895aea0e43619ddb4b291e9bfb218ad8cc2.php:42
+#: ../cache/91/915dd096fa238edee50d4d56090d27de7b5646c3d224afd6223ababb854891e0.php:35
+msgid "Name"
+msgstr "Nome"
+
+#: ../cache/10/101333678b7868367847e8df21d52c90ab6a7dcb02b4e8a4ba825be4ad90956c.php:64
+msgid "New"
+msgstr "Novo"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:35
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:47
+msgid "New TUT"
+msgstr "Novo WebTUT"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:297
+msgid "New WebTut"
+msgstr "Novo WebTUT"
+
+#: ../models/Session.php:240 ../models/Session.php:251
+msgid "No expert available at the moment."
+msgstr "Não existe nenhum perito disponível de momento."
+
+#: ../cache/c5/c598b7e9b95c14907c1f2c5473a48895aea0e43619ddb4b291e9bfb218ad8cc2.php:27
+msgid "No participants waiting"
+msgstr "Não existem participantes em espera"
+
+#: ../app/routes/api.php:503
+msgid "No participants waiting."
+msgstr "Não existem participantes em espera."
+
+#: ../cache/db_dump.php:39
+msgid "Norwegian flag"
+msgstr "Bandeira Norueguesa"
+
+#: ../cache/db_dump.php:16
+msgid "Not accepting new participants"
+msgstr "Não aceitando novos participantes"
+
+#: ../cache/91/915dd096fa238edee50d4d56090d27de7b5646c3d224afd6223ababb854891e0.php:74
+msgid "Not in Session"
+msgstr "Não está em sessão"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:435
+msgid "Notify Host"
+msgstr "Notificar dono da sessão"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:446
+msgid "Notify host by e-mail, upon student request to meet."
+msgstr ""
+"Notificar o dono da sessão por e-mail, assim que o estudante solicita o "
+"pedido de reunião."
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:426
+msgid "Number of participants"
+msgstr "Número de participantes"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:521
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:528
+msgid "OK, I ACCEPT"
+msgstr "OK, EU ACEITO"
+
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:658
+msgid "Ok"
+msgstr "Ok"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:523
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:530
+msgid "Ok, I accept"
+msgstr "Ok, Eu aceito"
+
+#: ../cache/db_dump.php:23
+msgid "On Hold"
+msgstr "Em espera"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:133
+msgid "Open Queue"
+msgstr "Abrir Fila"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:61
+msgid "Open meeting"
+msgstr "Abrir reunião"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:129
+msgid "Opened"
+msgstr "Aberto"
+
+#: ../cache/db_dump.php:11
+msgid "Opened no one on-line"
+msgstr "Em espera de participantes"
+
+#: ../cache/ec/ecd3b4af9be0ae66c0fba12bfc5ce23f36292d85e5b6e9a79b72725ff689eb7f.php:32
+#: ../cache/ec/ecd3b4af9be0ae66c0fba12bfc5ce23f36292d85e5b6e9a79b72725ff689eb7f.php:40
+#: ../cache/d4/d46d428ece17f2c91f8a38735fa50e3f29df341d1b0860a0dc82dc11b8e56e31.php:32
+msgid "Page Not Found"
+msgstr "Página não encontrada"
+
+#: ../cache/db_dump.php:15
+msgid "Participant Waiting for expert"
+msgstr "Participantes em espera:"
+
+#: ../cache/18/18456becc5b9d14651f3473a4a6a1b1adc258d2361259f0585b1e5b223c7f84b.php:29
+msgid "Participants in queue"
+msgstr "Participantes em fila:"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:53
+msgid "Participants view"
+msgstr "Vista de participantes"
+
+#: ../app/routes/api.php:172
+msgid "Participants waiting:"
+msgstr "Participantes em espera:"
+
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:220
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:413
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:442
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:252
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:422
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:218
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:411
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:440
+msgid "Please close the window and try again later."
+msgstr "Por favor feche a janela e tente novamente."
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:194
+msgid "Please close this window!"
+msgstr "Por favor feche a janela e tente novamente."
+
+#: ../cache/7c/7c0c41b828af981a786b0531d3554311d5cb99f33378f0d236636e30de7612e0.php:85
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:115
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:113
+msgid "Please wait"
+msgstr "Por favor aguarde"
+
+#: ../cache/db_dump.php:37
+msgid "Portuguese flag"
+msgstr "Bandeira Portuguesa"
+
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:193
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:193
+msgid "Powered by WebTUT"
+msgstr "Disponibilizado por WebTUT"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:388
+msgid "Profile"
+msgstr "Perfil"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:165
+msgid "QR Code to access meeting"
+msgstr "QRCode para entrar na reunião"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:140
+msgid "Queue State"
+msgstr "Estado da fila"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:457
+msgid "Queue strategy"
+msgstr "Estratégia da fila"
+
+#: ../cache/db_dump.php:27
+msgid "Rejected, kicked and blocked"
+msgstr "Rejeitado, expulso ou bloqueado"
+
+#: ../cache/db_dump.php:26
+msgid "Rejected, queue full"
+msgstr "Rejeitado, fila de espera para a sessão cheia"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:68
+msgid "Remote Video"
+msgstr "Video Remoto"
+
+#: ../cache/c5/c598b7e9b95c14907c1f2c5473a48895aea0e43619ddb4b291e9bfb218ad8cc2.php:71
+msgid "Remove user"
+msgstr "Remover utilizador"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:326
+msgid "Repeat Friday at"
+msgstr "Repetir na sexta-feira às"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:226
+msgid "Repeat Monday at"
+msgstr "Repetir na segunda-feira às"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:351
+msgid "Repeat Saturday at"
+msgstr "Repetir no sábado às"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:376
+msgid "Repeat Sunday at"
+msgstr "Repetir no domingo às"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:301
+msgid "Repeat Thursday at"
+msgstr "Repetir na quinta-feira às"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:251
+msgid "Repeat Tuesday at"
+msgstr "Repetir na terça-feira às"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:276
+msgid "Repeat Wednesday at"
+msgstr "Repetir na quarta-feira às"
+
+#: ../cache/7c/7c0c41b828af981a786b0531d3554311d5cb99f33378f0d236636e30de7612e0.php:58
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:56
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:100
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:56
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:98
+msgid "Request new call"
+msgstr "Solicitar nova chamada"
+
+#: ../cache/7c/7c0c41b828af981a786b0531d3554311d5cb99f33378f0d236636e30de7612e0.php:89
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:96
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:119
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:96
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:117
+msgid "Request to enter"
+msgstr "Solicitar para entrar"
+
+#: ../cache/ec/ecd3b4af9be0ae66c0fba12bfc5ce23f36292d85e5b6e9a79b72725ff689eb7f.php:50
+#: ../cache/2a/2ab5eccf0eaa54dc5997100b75ce0197f047e978547bc5e557812eff92ffb21b.php:66
+#: ../cache/d4/d46d428ece17f2c91f8a38735fa50e3f29df341d1b0860a0dc82dc11b8e56e31.php:50
+#: ../cache/c6/c683cb0af061c84b7df0b916c8c66496c8846d255fee9cc5003eb0d24ec926db.php:53
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:647
+#: ../cache/10/101333678b7868367847e8df21d52c90ab6a7dcb02b4e8a4ba825be4ad90956c.php:74
+#: ../cache/e1/e12f50e01d6efc776f94f35264f8511c6194e20f87de15d91cab956893800beb.php:63
+msgid "Return to Home Page"
+msgstr "Voltar à página de início"
+
+#: ../cache/90/9034d4b0b63e69518a4f727b9f1834c5e2c9e49d72d3d52fced4ac0062ee12d3.php:105
+#: ../cache/00/00393994865f09f6636db4d9054bdf30d65501a4cdbe0c059b835171f24b567c.php:65
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:628
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:246
+msgid "Return to dashboard"
+msgstr "Voltar à página de gestão"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:639
+msgid "Return to my WebTUTs"
+msgstr "Voltar aos meus WebTUTs"
+
+#: ../app/libs/WebMailer.php:28
+msgid "SMTP Error: Could not authenticate."
+msgstr "Erro SMTP: Não foi possível autenticar."
+
+#: ../app/libs/WebMailer.php:29
+msgid "SMTP Error: Could not connect to SMTP host."
+msgstr "Erro SMTP: Não foi possível conectar ao serviço SMTP."
+
+#: ../app/libs/WebMailer.php:41
+msgid "SMTP Error: The following recipients failed: "
+msgstr "Erro SMTP: A entrega para os seguintes destinatários falhou: "
+
+#: ../app/libs/WebMailer.php:30
+msgid "SMTP Error: data not accepted."
+msgstr "Erro SMTP: informação inválida."
+
+#: ../app/libs/WebMailer.php:43
+msgid "SMTP connect() failed."
+msgstr "Falhou a função SMTP connect()."
+
+#: ../app/libs/WebMailer.php:44
+msgid "SMTP server error: "
+msgstr "Erro do Serviço SMTP: "
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:334
+msgid "Saturday"
+msgstr "Sábado"
+
+#: ../cache/90/9034d4b0b63e69518a4f727b9f1834c5e2c9e49d72d3d52fced4ac0062ee12d3.php:94
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:610
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:225
+msgid "Save"
+msgstr "Guardar"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:73
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:514
+msgid "Security"
+msgstr "Segurança"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:134
+msgid "Session Details"
+msgstr "Sessão desconectada"
+
+#: ../cache/db_dump.php:9
+msgid "Session Disconnected"
+msgstr "Sessão desconectada"
+
+#: ../cache/db_dump.php:2
+msgid "Session Lurking"
+msgstr "Espreitando sessão"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:89
+msgid "Session layout"
+msgstr "Layout da Sessão"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:483
+msgid "Session queue strategy to deliver participants to experts."
+msgstr "Estratégia de atribuição dos participantes aos peritos."
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:133
+msgid "Set Dates"
+msgstr "Definir datas"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:396
+msgid "Set configuration"
+msgstr "Configurar"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:502
+msgid "Set security"
+msgstr "Definir segurança"
+
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:120
+msgid "Settings"
+msgstr "Configurações"
+
+#: ../cache/f9/f956867d3f1a6bad926c01ea67447334cf0aa9d9cbc593d96bcaaff79e2fce0e.php:161
+#: ../cache/7e/7ebb79c1400f15c1a3fe0ba28ac5e3c887e7228dc932532dd5a9dc0a60559c9a.php:161
+msgid "Share on facebook"
+msgstr "Partilhar no Facebook"
+
+#: ../app/libs/WebMailer.php:42
+msgid "Signing Error: "
+msgstr "Erro de assinatura: "
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:153
+msgid "Start Date"
+msgstr "Data de início"
+
+#: ../app/routes/api.php:509
+msgid "Start Time"
+msgstr "Hora de início"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:162
+msgid "Start date"
+msgstr "Data de início"
+
+#: ../cache/37/37c29bc81d1baa941a9019cddeffc7f3d7d3e00878d8c6e7b825f1665f4c04fc.php:41
+msgid "Started"
+msgstr "Iniciou"
+
+#: ../cache/37/37c29bc81d1baa941a9019cddeffc7f3d7d3e00878d8c6e7b825f1665f4c04fc.php:45
+#: ../cache/18/18456becc5b9d14651f3473a4a6a1b1adc258d2361259f0585b1e5b223c7f84b.php:40
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:303
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:413
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:310
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:420
+msgid "State"
+msgstr "Estado"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:91
+msgid "Statistics"
+msgstr "Estatísticas"
+
+#: ../cache/7c/7c0c41b828af981a786b0531d3554311d5cb99f33378f0d236636e30de7612e0.php:131
+#: ../cache/7c/7c0c41b828af981a786b0531d3554311d5cb99f33378f0d236636e30de7612e0.php:139
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:144
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:152
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:142
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:150
+msgid "Student Name:"
+msgstr "Nome do Aluno:"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:359
+msgid "Sunday"
+msgstr "Domingo"
+
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:218
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:411
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:440
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:250
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:420
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:216
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:409
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:438
+msgid "Tech support was notified."
+msgstr "O suporte técnico foi notificado."
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:235
+msgid "Test"
+msgstr "Testar"
+
+#: ../cache/8c/8cc953e24a0f6ac35c22db57dcdc76f75834cd531467a6a19d5005fd3f59248b.php:129
+#: ../cache/8c/8cc953e24a0f6ac35c22db57dcdc76f75834cd531467a6a19d5005fd3f59248b.php:158
+msgid "Test Audio"
+msgstr "Testar áudio"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:528
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:535
+msgid ""
+"The cookies help us to offer this service. By using this service, you accept "
+"the usage of cookies."
+msgstr ""
+"As cookie ajuda-nos a oferecer este serviço. Ao usar este serviço, aceita a "
+"utilização das cookies."
+
+#: ../app/libs/WebMailer.php:36
+msgid "The following From address failed: "
+msgstr "Os segiontes endereços de origem falharam: "
+
+#: ../cache/db_dump.php:17
+msgid "The maximum number of queued participants has been reached"
+msgstr "O número máximo de participantes foi atingido"
+
+#: ../models/Session.php:253
+msgid "The session isn't available at the current moment."
+msgstr "A sessão não está disponível neste momento."
+
+#: ../models/Session.php:257
+msgid "The session isn't available today."
+msgstr "A sessão não está disponível hoje."
+
+#: ../models/Session.php:260
+msgid "The session on the current date."
+msgstr "A sessão não está disponível na data indicada."
+
+#: ../cache/a9/a953025a2e3596a8d8eb560643cf86cff412c79464327ee628661ae467d71a6f.php:91
+msgid "The teacher is waiting for me"
+msgstr "O professor está à minha espera"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:284
+msgid "Thursday"
+msgstr "Quinta-feira"
+
+#: ../cache/18/18456becc5b9d14651f3473a4a6a1b1adc258d2361259f0585b1e5b223c7f84b.php:48
+msgid "Time waiting"
+msgstr "Tempo em espera"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:307
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:417
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:94
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:314
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:424
+msgid "Title"
+msgstr "Título"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:105
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:111
+msgid "True"
+msgstr "Verdade"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:234
+msgid "Tuesday"
+msgstr "Terça-feira"
+
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:216
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:409
+#: ../cache/69/6941bdec32a8af6e807ca7c345402446c9c8180476dc24b40ee7ca0b4d580b0f.php:438
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:248
+#: ../cache/80/808f757ea99aacdaadc87e2f3ad523d93eddb967fd48956604c64608c6622bac.php:418
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:214
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:407
+#: ../cache/59/59c9326f5eb1ee6437fee3bba1a82d9ce0d8225e5de9a1c9ff7f2100b4d9b827.php:436
+msgid "Unable to establish the call."
+msgstr "Foi impossível establecer a chamada."
+
+#: ../app/libs/WebMailer.php:32
+msgid "Unknown encoding: "
+msgstr "Formato desconhecido: "
+
+#: ../models/Session.php:265
+msgid "Unknown session state."
+msgstr "Estado desconhecido da sessão."
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:554
+msgid "User must authenticate"
+msgstr "Utilizador tem de se autenticar"
+
+#: ../cache/db_dump.php:10
+msgid "User was removed from queue"
+msgstr "O utilizador foi removido da fila"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:565
+msgid "Visibility"
+msgstr "Visibilidade"
+
+#: ../cache/15/15962a5d9f81fec38c002d1fca92229611ab4148757d02b15b633e63fafe2444.php:315
+#: ../cache/c1/c1f4c1bf6c8c0fba3a556d0dae3a204f1c8c11ba1e259d1737d7e82570599cfb.php:322
+msgid "Visible to All"
+msgstr "Visivel a todos"
+
+#: ../cache/f6/f693fe0abdebddd948bad5019a6776517cd3e0cec29a792854f23fcd9c48c41f.php:268
+msgid "Waiting"
+msgstr "Aguardando"
+
+#: ../cache/c5/c598b7e9b95c14907c1f2c5473a48895aea0e43619ddb4b291e9bfb218ad8cc2.php:46
+msgid "Waiting for"
+msgstr "Aguardando por"
+
+#: ../cache/db_dump.php:19
+msgid "Waiting for expert"
+msgstr "Aguardando por especialista"
+
+#: ../cache/db_dump.php:20
+msgid "Waiting with Priority"
+msgstr "Aguardando com prioridade"
+
+#: ../cache/db_dump.php:21
+msgid "Waiting without Priority"
+msgstr "Aguardando sem prioridade"
+
+#: ../cache/a9/a95932ccd51f793f88062daaa5d757ab6f53f3d1e13bea149ee65194d1526b06.php:288
+msgid "WebTUT"
+msgstr "WebTUT"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:199
+msgid "WebTUT duration"
+msgstr "Duração do WebTUT"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:532
+msgid "WebTUT is enabled"
+msgstr "O WebTUT está ativo"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:99
+msgid "WebTUT name"
+msgstr "Nome do WebTUT"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:105
+msgid "WebTUT public name"
+msgstr "Nome público o webtut"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:576
+msgid "Webtut visible on public list."
+msgstr "WebTUT visível na lista pública."
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:259
+msgid "Wednesday"
+msgstr "Quarta-feira"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:138
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:295
+msgid "Width"
+msgstr "Largura"
+
+#: ../cache/78/786c5963d50b0042a60f94f38b26ded98bd785e25e29a09a5c1c4062ffa48e33.php:144
+msgid "Width 100%"
+msgstr "Largura 100%"
+
+#: ../app/libs/WebMailer.php:40
+msgid "You must provide at least one recipient email address."
+msgstr "Necessita de disponibilizar pelo menos um endereço destino."
+
+#: ../cache/db_dump.php:31
+msgid "anonymous"
+msgstr "anónimo"
+
+#: ../cache/db_dump.php:33
+msgid "closed"
+msgstr "Fechado"
+
+#: ../cache/db_dump.php:34
+msgid "deserted"
+msgstr "deserta"
+
+#: ../cache/91/915dd096fa238edee50d4d56090d27de7b5646c3d224afd6223ababb854891e0.php:43
+msgid "e-Mail"
+msgstr "e-Mail"
+
+#: ../cache/3b/3bca4f8f24a21191847b7d3014314d63dcd1468e2a27aa9785d6f089b48936f1.php:420
+msgid "participants"
+msgstr "participantes"
+
+#: ../cache/db_dump.php:35
+msgid "undefined"
+msgstr "indefinido"
+
+#: ../app/routes/tut.php:431
+msgid "unknown session:"
+msgstr "Sessão desconhecida:"
+
+#: ../cache/db_dump.php:32
+msgid "waiting"
+msgstr "Aguardando"
+
+#~ msgid "Create new WebTUT"
+#~ msgstr "Criar um novo WebTUT"
+
+#~ msgid "Current state:"
+#~ msgstr "Estado atual:"
+
+#~ msgid "Enter"
+#~ msgstr "Entrar"
+
+#~ msgid "Enter WebTUT as a teacher"
+#~ msgstr "Entrar num WebTUT como professor"
+
+#~ msgid "File not found:"
+#~ msgstr "Ficheiro não encontrado"
+
+#~ msgid "German flag"
+#~ msgstr "Bandeira Alemã"
+
+#~ msgid "Italian flag"
+#~ msgstr "Bandeira Italiana"
+
+#~ msgid "Max queue size"
+#~ msgstr "Tamanho máximo da fila"
+
+#~ msgid "Owner"
+#~ msgstr "Dono"
+
+#~ msgid "Refresh"
+#~ msgstr "Atualizar"
+
+#~ msgid "Spanish flag"
+#~ msgstr "Bandeira Espanhola"
+
+#~ msgid "Updating..."
+#~ msgstr "Atualizando..."

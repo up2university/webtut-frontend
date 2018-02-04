@@ -1,0 +1,23 @@
+
+    SetEnv deploy_mode development
+    SetEnvIf Request_URI ^/opt/webtut/webtut-frontend/html(/|$) webtut
+
+    <Directory /opt/webtut/webtut-frontend/html>
+      AllowOverride None
+      Require all granted
+      
+      RewriteEngine  on 
+      RewriteBase  /webtut/
+
+      RewriteCond %{REQUEST_FILENAME} !-f
+
+      RewriteRule ^(.*)$ index.php [QSA,L]
+
+    </Directory>
+
+    Alias /webtut /opt/webtut/webtut-frontend/html/
+    Alias /webtut/ /opt/webtut/webtut-frontend/html/
+
+    CustomLog /opt/webtut/webtut-frontend/logs/access.log common env=webtut
+    DirectoryIndex index.html index.php
+

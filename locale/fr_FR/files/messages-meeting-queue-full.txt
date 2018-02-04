@@ -1,0 +1,1 @@
+Le nombre maximum de participants dans la file d'attente est atteint. Veuillez ré-essayer plus tard.

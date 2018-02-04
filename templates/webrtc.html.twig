@@ -1,0 +1,147 @@
+{% macro remoteVideo() %}
+<video id="remoteVideo" autoplay width="100%"></video>
+{% endmacro %}
+
+{% macro localVideo() %}
+<video id="localVideo" muted="true" autoplay width="100%" oncontextmenu="return false;"></video>
+{% endmacro %}
+
+{% macro localAudioBar() %}
+<div id="localAudioVolumeDiv"><canvas id="localAudioVolume" style="width:100%; height:20px;padding:0px; margin: 0px;"></canvas></div>
+{% endmacro %}
+
+{% macro testAudio() %}
+<p><button class="btn" id="localAudioTest">{% trans "Test Audio" %}</button></p>
+{% endmacro %}
+
+{% macro testAudioBadge() %}
+<span style="cursor: pointer" class="badge" id="localAudioTest">{% trans "Test Audio" %}</span>
+{% endmacro %}
+
+{% macro javascriptScript(config, session, meeting) %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$("#localAudioTest").click(function() {
+
+  var eventSound=new Audio("{{ config.base_path }}/assets/sounds/participants_waiting.mp3",100,true); 
+  eventSound.play();
+
+});
+
+function webrtc_step1 () {
+
+  navigator.getUserMedia = navigator.getUserMedia ||navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+  if (navigator.getUserMedia)
+  {
+    var constraints = { audio: true, video: true };
+    navigator.getUserMedia(constraints, handleLocalVideo, forError)
+  }
+
+  function handleLocalVideo(stream) {
+  
+    var video = document.querySelector('#localVideo');
+    video.src = window.URL.createObjectURL(stream);
+    video.onloadedmetadata = function(e) {
+      video.play();
+    };
+    
+    audioContext = new AudioContext();
+    analyser = audioContext.createAnalyser();
+    microphone = audioContext.createMediaStreamSource(stream);
+    javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+    analyser.smoothingTimeConstant = 0;
+    analyser.fftSize = 2048;
+
+    microphone.connect(analyser);
+    analyser.connect(javascriptNode);
+    javascriptNode.connect(audioContext.destination);
+
+    canvasElement = document.getElementById("localAudioVolume");
+    canvasContext = canvasElement.getContext("2d");
+    
+    window.localStream = stream;
+
+    var parent = document.getElementById('localAudioVolumeDiv');
+    
+    var width = parent.clientWidth - parseInt(parent.style.paddingLeft) - parseInt(parent.style.paddingRight);                     
+    var height = parent.clientHeight - parseInt(parent.style.paddingTop) - parseInt(parent.style.paddingBottom);
+    
+/*
+    canvasElement.width = wdt;
+    canvasElement.height = ht;
+*/
+/*
+    canvasElement.setAttribute('width',width+"px");
+    canvasElement.setAttribute('height',height+"px");
+*/
+    width = canvasElement.width;
+    height = canvasElement.height;
+
+    var maxAudioLvl = 0;
+    var oldAudioLvl = 0;
+
+    javascriptNode.onaudioprocess = function() {
+    
+      var array =  new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteFrequencyData(array);
+      var values = 0;
+
+      var length = array.length;
+      for (var i = 0; i < length; i++) {
+        values += array[i] * array[i];
+      }
+                  
+      var average = Math.sqrt(values / length);
+      maxAudioLvl = Math.max(maxAudioLvl,average);
+	    average = Math.max( average, oldAudioLvl-oldAudioLvl*0.05);
+      oldAudioLvl = average;
+      var red = average - maxAudioLvl * 0.8;
+          
+      canvasContext.clearRect(0, 0, width, height);
+      canvasContext.fillStyle = '#22ff22';
+      canvasContext.fillRect(0, 0, width * average / maxAudioLvl, height);
+      if (red > 0) {
+        canvasContext.fillStyle = '#ff2222';
+        canvasContext.fillRect(width * 0.8,0,red * width / maxAudioLvl,height);
+      }
+    }
+
+  };
+  
+  function forError(err) {
+    console.log(err.name + ": " + err.message);
+  };
+    
+};
+
+function webrtc_step3(call) {
+
+  console.log("Step3 called!");  
+  
+  // Hang up on an existing call if present
+  if (window.existingCall) {
+    window.existingCall.close();
+    sendData(socket, "cleanChatRoom", null); 
+  }
+  // Wait for stream on the call, then set peer video display
+  call.on('stream', function(stream){
+    window.existingCall = call;
+    $('#remoteVideo').prop('src', URL.createObjectURL(stream));
+    sendData(socket, "inviteToMyChatRoom", {"peerjsId": "{{ meeting.token }}"} );     
+    
+    {% if config.callstats_app_id is defined %}
+      var usage = callStats.fabricUsage.multiplex;
+      callStats.addNewFabric(call.peerConnection, call.peer, usage, "{{ meeting.token }}", callstats_Callback);
+    {% endif %}
+    
+  });
+  
+    
+
+}
+
+</script>
+{% endmacro %}
